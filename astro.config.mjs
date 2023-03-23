@@ -11,6 +11,7 @@ import image from "@astrojs/image";
 import webmanifest from "astro-webmanifest";
 
 /** @type {import('astro-m2dx').Options} */
+import compress from "astro-compress";
 const m2dxOptions = {
   styleDirectives: true
 };
@@ -22,24 +23,24 @@ export default defineConfig({
   integrations: [mdx(), sitemap(), turbolinks(), image({
     serviceEntryPoint: '@astrojs/image/sharp'
   }), webmanifest({
-      name: '[MIRTH.CC]',
+    name: '[MIRTH.CC]',
+    /**
+     * optional
+     **/
+    icon: 'src/mirth-wb.svg',
+    // source for favicon & icons
 
-      /**
-       * optional
-       **/
-      icon: 'src/mirth-wb.svg', // source for favicon & icons
-
-      short_name: 'MIRTH',
-      description: 'Lumirth\'s Domain',
-      start_url: '/',
-      theme_color: '#fff',
-      background_color: '#fff',
-      display: 'standalone',
-      config: {
-        insertFaviconLinks: false,
-        insertAppleTouchLinks: true,
-      }
-  })],
+    short_name: 'MIRTH',
+    description: 'Lumirth\'s Domain',
+    start_url: '/',
+    theme_color: '#fff',
+    background_color: '#fff',
+    display: 'standalone',
+    config: {
+      insertFaviconLinks: false,
+      insertAppleTouchLinks: true
+    }
+  }), compress()],
   markdown: {
     remarkPlugins: [remarkMath, remarkDirective, [m2dx, m2dxOptions]],
     rehypePlugins: [[rehypeKatex, {

@@ -77,20 +77,6 @@ jobs:
             --site "${{ steps.pages.outputs.origin }}" \
             --base "${{ steps.pages.outputs.base_path }}"
         working-directory: ${{ env.BUILD_PATH }}
-      - name: Brotli compress the html, css and js files in the "build" directory
-        id: brotli
-        uses: Charlesworth/compress-action@1.0.0
-        with:
-          target-directory: ${{ env.BUILD_PATH }}/dist
-      - name: Resize Images
-        id: resize-images
-        # You can change the version as well
-        uses: gonzalonaveira/gh-image-resizing@master
-        with:
-          IMAGES_MAX_WIDTH: "600"
-          IMAGES_QUALITY: "90"
-          IMAGES_FORMATS: "jpg, jpeg, png, ico" 
-          IMAGES_DIRECTORIES: ${{ env.BUILD_PATH }}/dist
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
