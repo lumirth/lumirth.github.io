@@ -33,8 +33,6 @@ export default defineConfig({
     short_name: 'MIRTH',
     description: 'Lumirth\'s Domain',
     start_url: '/',
-    theme_color: '#fff',
-    background_color: '#fff',
     display: 'standalone',
     config: {
       insertFaviconLinks: false,
