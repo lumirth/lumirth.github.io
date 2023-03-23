@@ -1,0 +1,29 @@
+---
+import { getCollection } from 'astro:content';
+import Card from '../../components/Card.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import Main from '../../components/Main.astro';
+
+const posts = (await getCollection('blog')).sort(
+	(b, a) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
+);
+---
+
+<meta charset="utf-8" />
+<!DOCTYPE html>
+<html lang="en">
+	<Main page_title="MIRTH.CC/BLOG">
+		{
+			posts.map((post) => (
+				<Card
+					title={post.data.title}
+					href={`/blog/${post.slug}/`}
+					date={post.data.pubDate}
+					description={post.data.description}
+					link_enabled={true}
+				/>
+			))
+		}
+	</Main>
+	
+</html>

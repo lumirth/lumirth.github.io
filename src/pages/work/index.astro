@@ -1,0 +1,32 @@
+---
+import { getCollection } from 'astro:content';
+import Card from '../../components/Card.astro';
+import Main from '../../components/Main.astro';
+
+const posts = (await getCollection('work')).sort(
+	(b, a) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
+);
+---
+
+<meta charset="utf-8" />
+<!DOCTYPE html>
+<html lang="en">
+	<Main page_title="MIRTH.CC/WORK">
+		{
+			posts.map((post) => (
+				<Card 
+					title={post.data.title} 
+					href={`/work/${post.slug}/`} 
+					date={post.data.pubDate} 
+					description={post.data.description} 
+					tags_icon={post.data.tags_icon} 
+					tags_text={post.data.tags_text} 
+					image_source={post.data.image_source} 
+					image_alt={post.data.image_alt}
+					link_enabled={true}
+					tags_enabled={true}
+				/>	
+				))
+		}
+	</Main>
+</html>

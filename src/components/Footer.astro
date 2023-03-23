@@ -1,0 +1,79 @@
+---
+import { AUTHOR_NAME } from "../consts";
+
+const today = new Date();
+---
+<br/>
+
+<footer>
+  <div class="links">
+    <!-- github -->
+    <a href="https://www.github.com/lumirth" target="_blank" rel="noopener noreferrer">
+      GITHB
+    </a>
+    <!-- linkedin -->
+    •
+    <a href="https://www.linkedin.com/in/lumirth" target="_blank" rel="noopener noreferrer">
+      LKDIN
+    </a>
+    •
+    <!-- email -->
+    <a href="mailto:lu[at]mirth[dot]cc" target="_blank" rel="noopener noreferrer">
+    EMAIL
+  </a>
+</div>
+  <div class="copyright">
+    &copy; {today.getFullYear()} {AUTHOR_NAME}
+  </div>
+</footer>
+<style>
+	
+/* footer styling */
+footer {
+  /* font-weight: lighter; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 0rem;
+}
+@media screen and (min-width: 768px) {
+footer {
+    align-items: unset;
+    justify-content: unset;
+    margin-top: 1.3rem;
+    margin-bottom: 4rem;
+  }
+}
+
+/* link style where instead of colored links, links are underlined and the underline floats downwards when hovered */
+a {
+  color: var(--power-text-color);
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+
+/* make body 60% on desktop */
+/* link style where instead of colored links, links are underlined and the underline floats downwards when hovered */
+@media (min-width: 768px) {
+  a:hover {
+    color: var(--accent-color);
+    transition: all 0.2s ease-in-out;
+  }
+}
+
+.copyright {
+  flex-shrink: 0;
+}
+
+.links {
+  font-family: "Fira Code", monospace;
+  display: flex;
+  flex-direction: row;
+  align-items: left;
+  justify-content: left;
+  gap: 0.5rem;
+}
+
+</style>

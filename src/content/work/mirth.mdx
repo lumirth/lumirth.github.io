@@ -1,0 +1,628 @@
+---
+title: "MIRTH.CC"
+description: "A highly performant exercise in minimalism(with perfect Google Lighthouse scores to boot). Built to boost my ego."
+pubDate: "Mar 18 2023"
+updatedDate: "Mar 21 2023"
+banner_source: "/mirthccbanner.jpeg"
+image_source: "/mirth.png"
+image_alt: "A nighttime view of a city, likely in Japan. Bright lights and billboards cover the scene. The camera is looking down. Tiny people can be seen in the streets."
+tags_icon:
+    - "devicon-javascript-plain colored"
+    - "devicon-html5-plain colored"
+    - "devicon-css3-plain colored"
+    - "devicon-chrome-plain colored"
+    - "astro-icon"
+tags_text: []
+tags: []
+---
+
+<video autoplay loop muted webkit-playsinline playsinline title="Perfect Google Lighthouse score, four green circles with '100' inside each one, with text underneath each reading, in order: 'Performance, Accessibility, Best Practices, SEO">
+  <source src="/perfect-lighthouse.mp4" type="video/mp4"/>
+</video>
+{/* ![Perfect Google Lighthouse score](/perfect-lighthouse.mp4) */}
+
+`[MIRTH.CC]` is where you are right now. I hope you're enjoying your stay.
+
+This one's a doozy. Fair warning, I'm a rambly philosophy major in a CS major's body. Make some tea, this'll probably take a while. For easy navigation, I've included a table of contents below.
+
+## Table of Contents
+
+- [Introduction](#introduction) - *An ode to the personal site*
+- [Inspiration](#inspiration) - *A spoonful of nostalgia and bemoaning the state of the web*
+- [Design Philosophy](#design-philosophy) - *A visit from Grukdar and accidental principles*
+- [Implementation](#implementation) - *The bits worth sharing*
+  - [Stack](#stack) - *The recipe*
+  - [Points of Interest](#points-of-interest) - *Memorable moments*
+- [Conclusion](#conclusion) - *Summarizing the nonsense*
+{/* - [Points of Interest](#points-of-interest)  */}
+
+
+## Introduction
+
+Personal websites are a bit of a shitshow these days. There's a lost art to crafting your own little corner of the web. 
+
+Frankly, it's something you can't really do anymore, owing to how the web's structure has changed in the past couple decades. To be honest, for most people, "the internet" is *just* social media. Nothing else. Spending time on "the internet" is just hopping between the same three websites owned by mega-corps. Most of the time it's not even websites, it's apps! Web 1.0 is dead; long live Web 2.0[^1]. Think about it, for a second. Has a Twitter, Instagram, or Facebook profile ever once caught your eye? It's all the same shlock. There's a serene beauty to the personality only a personal website can bring.
+
+Personal websites, have, at various times, startled, roused, and inspired me. And some just rouse a thorough nostalgia. Nothing beats the feeling of stumbling upon an abandoned engineer's website, the kind of website that calls the author a junior in college, but if you look them up you'll see they're a half-decade out of college and into their career. It makes me sad and curious. Do they stop making projects once they escape academia? Is it one of those "last thing I wanna do when I get home from a day of programming is program" deals? I hope they're doing well. I hope they're happy, whether they're making things or not.
+
+If I was less conscious of my brand, online presence, and digital footprint, I'd love for this site to be that kind of site someday. I pray I am gifted the privilege of being distracted by some new escapade, subsequently leaving this site to quietly rot away. Maybe it'll be a place to return to once life has settled down, where I come back a changed person, weathered by the flow of time. Maybe I'll even inject some life into it again with a rambling blog post about whatever niche garbage I've become enamored with that week.
+
+Look at me, imagining a world where I don't touch this website. Can you tell I've spent too many nights in a row tinkering on it? No? Good. I'm glad I've fooled you.
+
+## Inspiration
+
+:::style{.aside-right}
+![stevelosh.com](/stevelosh.png)
+![danluu.com](/danluu.png)
+God bless these two.
+:::
+
+First, it was [stevelosh.com](https://stevelosh.com/). Then it was [danluu.com](https://danluu.com/). Take a look at these screenshots. Can you notice the pattern? They're painfully simple. They're KISS[^2] at its finest. They're utilitarian. They're minimalist. They're beautiful. They *just work*.
+
+I miss the days when the web was just websites just like these. An age where "browsing the web" was looking at GeoCities sites and finding and playing a good MUD[^3]. Of course, I was still in diapers during this age, so my rambling is really just nostalgia by proxy. But I can't help but feel that the web has lost something in the process of becoming what it is today.
+
+Obviously, computer science students get taught to optimize—it's probably the most significant distinction between the degree-less and the degree-having programmer. *Big O* and all that. But I feel like, somehow, the vast majority of code is still remarkably *wasteful*. For a severe example, take Bitcoin's [energy consumption problem](https://rmi.org/cryptocurrencys-energy-consumption-problem/). As much as many crypto fans might pitch cryptocurrencies as the "currency"[^4] of the future, it cannot be overstated how startlingly *efficient* VISA, MasterCard, Discover, and the like are by comparison. The amount of energy required to process a single transaction on the Bitcoin network far exceeds the amount of energy required to process all the transactions on the VISA network in a year. There do exist [efforts to make cryptocurrencies less inefficient](https://ethereum.org/en/developers/docs/consensus-mechanisms/pos/), but the fact that this wasn't built-in from the outset is a horrific failing.
+
+Every line of code written and executed has a carbon cost. Now, I don't mean to say I'm some sort of carbon exemplar—I use ChatGPT[^5] pretty regularly these days, and large language models(LLMs) aren't exactly energy-efficient. But, I do still think it's important to be cognizant of the fact that, as a developer, you are contributing to the problem. At the very least, build the habit of being mindful of the consequences of the code you write.[^6]
+
+So here I am. Being mindful. Though, I do feel Luu and Losh go a little too far. Sure, a principled stand on simplicity is great and all, but what if you want to show your stuff off to a normie[^7] friend of yours, maybe at a coffee shop? What if you want your webite to be... I don't know, nice to look at? Sure, [stevelosh.com](stevelosh.com) is an old favorite of mine, but serif fonts were made for print, not displays. Come to the dark side of `font-family: sans-serif;`. Come on man, try some of these Google Fonts. Just one hit, man, it'll make you feel all warm and fuzzy inside. You know you want to. They say you'll get addicted, but that's just the *man* trying to stop you from opening your *third eye*, broski. Align your chakras with me and `pnpm create astro@latest`.
+
+
+## Design Philosophy
+
+So, as with all of my projects, the original idea is a half-baked, malformed monstrosity that never should've been allowed to see the light of day. When I have a new idea, I name it *Grukdar*. Hey Grukdar! Whatcha thinking?
+
+> Make blog. Lot post. No phone. Make pretty. Work fast. Break thing.
+
+Well, Grukdar, that's an interesting idea. I'm not sure I like it, but I'm also not sure I hate it. You might even be on to something.
+
+> Grukdar like cave. Grukdar read blog [give man access to cave](https://news.ycombinator.com/item?id=35164819#35199292). Make blog. Get cave. Very good.
+
+I-
+
+Um...
+
+Well, now that I think about it... you actually make a good point, Grukdar. A personal website is actually a good idea. A chance to express yourself openly and show off your work in your own little corner of the web. Maybe even connect with like-minded people in the process. For that matter, having a projects page can give you a good overview of what you've built, and what you might want to build going forward.
+
+:::style{.aside-left}
+<video autoplay loop muted webkit-playsinline playsinline title="GIF clip of navigating between tabs on mirth.cc on a mobile device">
+  <source src="/teensy-mirth-nav.mp4" type="video/mp4"/>
+</video>
+Watch her go! 
+:::
+
+Did I know or think any of that before going into this? No. The way Grukdar *actually* works is he crawls out of his cave with some fraction of a fraction of an idea, and then he possesses you and starts typing. And he kills himself in the process. As you start throwing things together, you start to feel the weight of the idea, it starts to fill itself out. You start to see the shape of the thing you're building. You think, "man, I should have a navbar". Then, as you're throwing it together, you think about how you moved the apps you use most often close to your thumb on your phone's home screen, and the apps you use the least(or don't want to be using), far away. Then, you think "wait, wouldn't it be nice if the navbar became an easy-to-reach tab bar on mobile?" 
+
+Then you click between the navbar pages and realize you don't like seeing Firefox[^8] reload the page every time you click on a link. So you start trying to figure out how other sites get that "no-load" feel. Point being, as you're slinging around live ammo, you start to realize what this project actually means, what its real goals are. And Grukdar is gone. He's dead. He's been replaced by a new, more powerful, more *real* idea. And that's when you know you're on to something.
+
+So here are the design principles I discovered along the way:
+
+- **Optimize, optimize, optimize.** Google Lighthouse is your god. A personal blog shouldn't be loading 20 [gorillion](https://en.wiktionary.org/wiki/gorillion) megabytes of JavaScript. You're not Microsoft Word. 
+- **Be minimalist and pretty, but above all, be usable**. Aim for a balance between *usability* and *design*. Err on the side of the user when in doubt. Your personal website is a rare exception to the standard Twitter-Instagram-Tiktok rotation many people have themselves locked in. As such, don't disincentivize people from sticking around.
+- **Be *simple***. Cruft is the easiest thing to add to a website, especially if you're early in your career and feel inadequate. You feel the need to plaster big pictures and animations and links and cards and designs for a website that could exist better entirely in plaintext. Dress for the job you want, not the job you have. The professionals, unless they're designers, have dead-simple websites. Take [Paul Graham](http://paulgraham.com/), founder of Y Combinator, as an example.
+
+There's a mix of personal preference and objective correctness in these bullet points. I'll let you figure out which is which. If you don't care about the nitty-gritty details of how I actually implemented these ideas, feel free to [skip the next section](#conclusion).
+
+## Implementation
+
+It's not the first time I've had a personal website. If you know me personally, you know this. While each sequential site varied wildy in many different ways, they all shared a common thread: Github. I've been using Github Pages to host my site since I was in high school. I'm not sure why I felt I needed a personal site in high school, but I'm glad I had the good sense to be thoughtful about my online presence so early. Or maybe I just wanted a site to put in the "link" field under my Instagram bio. Nobody knows. If you find a time machine, let me know. I'll go back and ask.
+
+Point being, if you want to host a personal website for the absolute minimum possible cost, here's the rubric: 
+
+- Throw together a static site on a Github repo named `username.github.io`, 
+- Put it on [Github Pages](https://pages.github.com/) 
+- Buy a domain name and point it to your Github Pages site. 
+
+That's it. For as little as the cost of your domain[^9], you've got a personal site that's as professional as your domain name and web design. I'm proud of you. You've come so far in just three bullet points.
+
+So what have my sites been like? Honest answer: Jekyll. It's what Github Pages supported out of the box, and it had some themes I was happy to snatch and apply my own coat of paint on. If you've notice my little monogram logo that I use on my socials and on my [Github](https://www.github.com/lumirth)[^10], that logo was born with my first personal site. I kept a page on my site(and I still have the `.md` stored away somewhere) called "The Laumono Project", which was a very self-assured name for an admittedly[^11] not-half-bad logo. Can you tell I was almost a graphic designer?
+
+At some point, about six months ago at time of writing, I took my websites completely offline. I owned two domains, a long one representing my full username, and a short one, with a `constipation -> cnstpshn`[^12] style shortening. Honestly, I don't even remember the exact reason at the time, but it was something privacy related. I had a distinct need to not be google-able at the time. The progression was as follows:
+
+| Site | Built with | Purpose | How long it lasted |
+| - | - | - | - |
+| First site | Jekyll + Github Pages | Portfolio | ~1yr  |
+| Second site - full username | Jekyll + Github Pages |  Blog & portfolio | ~2yrs |
+| Second site - shortened | HTML/CSS + Bootstrap + Github Pages | Link tree | ~2yrs |
+
+... and will hopefully end with:
+
+| Site | Built with | Purpose | How long it'll last |
+| - | - | - | - |
+| Third and final site | Astro + Github Pages | Whatever I want - Blog & projects list, at the moment | Forever and then some |
+
+And here you can see that I've revealed what tech this site is built on. Here comes the stack.
+
+### Stack
+
+You've seen the nutrition facts. Here are the ingredients. Warning: this code is known to the State of California to cure cancer, birth defects, and reproductive harm.
+
+- **[Astro](https://astro.build)** - "[The] all-in-one web framework designed for speed."
+- **[Node.js](https://nodejs.org/en)** - Almost goes without saying.
+- **[pnpm](https://pnpm.io/)** - Oh, `pnpm`, my beloved.
+- **HTML/CSS/JS** - Astro is remarkably close to pure HTML, a refreshing choice for web frameworks. All valid HTML is valid Astro, so using old knowledge and tricks is made easy.
+- **[Github Pages](https://pages.github.com/)** - Ol' reliable. Oh, my dear Microsoft, this service is so great, I pray you don't have ulterior motives.
+- **[Github Actions](https://github.com/features/actions)** - A recent addition to Github Pages' functionality, now you can use a Github action to build and deploy your website, and [Astro has one](https://github.com/withastro/action). CI/CD for the everyman! I actually use [another Github action](https://github.com/Charlesworth/compress-action) to compress the distribution before it gets pushed to the web, which has been incredibly convenient.
+
+..and that's about it. Here's my advice: the biggest reason to *not* use Astro is because it does *too much* for you. If you want to build a project where you can write "Python, Django, FastAPI, JavaScript/Svelte/Vite/Node.js" on your resume and sound extremely capable, look elsewhere. If you want to enjoy a framework that works great(not an ad) for building a blog, Astro's worth a shot. It has been true to its promises, at least in my case.
+
+And here are some extra notes:
+
+- **CSS** - I wish I had an excuse to get my hands on SASS, LESS, or Tailwind(though I have tinkered with each before), but I haven't found one yet—at least not here. Perhaps sooner or later I'll hit my head against a Grukdar visit where the scale demands some better CSS management. Until then, I'll tangle with raw CSS. She's not half bad.
+- **[TypeScript](https://www.typescriptlang.org/)** - Used in small doses here and there, wherever `astro-create` automatically added it. Since the goal was simplicty, the goal was to minimize JavaScript written. Since there's little JavaScript written, using a JavaScript-improving tool like TypeScript is a little unnecessary. Making sure 100 lines of `app.js` are airtight aren't worth the effort to chuck TypeScript in.
+
+### Points of Interest
+
+I like to talk about tech like I know what I'm talking about. Here's the thing, the big secret: I don't know a goddamn thing! And I suspect nobody else does either. Maybe there was once a day where the entirety of web technology could fit inside one human skull, but that day has long since been collecting dust in the back of the history books.
+
+I'm a student. So, you probably don't *expect* me to know much. But, often, I find myself frustrated by how *disengaged* most of my peers are! Rust, Svelte, WebAssembly, Astro—these are words that I *expect* to be gibberish to 90% of the people I talk to in a day[^13], but when people who, for all intents and purposes, intend to dedicate decades of their life to this field, seem to care very little about what the Hot New Thing™ is and why it's interesting, I find myself putting my head in my hands. And... also proud? If the standard Computer Science student discourse is "do you like Python or C++ better?"[^14], and I'm out here asking questions like "I want to make a Rust project that might force me to write a lexer, and I'd rather die. Where should I start?", I'm probably doing at least *something* right[^15].
+
+This is all a long-winded way to say: here's all the stuff I spent any extended amount of time thinking about, tinkering on, or struggling with for this project. Please don't be surprised if it's something that should've been obviously easy! Gotta learn somehow. I just happen to be exposing my learning to the open air.
+
+#### POI Table of Contents
+
+- [SPA-like Routing](#spa-like-routing)
+- [Katex](#katex)
+- [Syntax Highlighting](#syntax-highlighting)
+- [Favicons](#favicons)
+- [Fonts](#fonts)
+- [Copy Buttons](#copy-buttons)
+- [Line Numbers](#line-numbers)
+- [The Missing Attribute](#the-missing-attribute)
+- [Mailto Obfuscation](#mailto-obfuscation)
+- [Neat Little Tag Icons](#neat-little-tag-icons)
+
+#### SPA-like Routing
+
+For the uninitiated:
+
+> SPA-like routing uses client-side routing to mimic Single Page Application behavior. It dynamically loads views/components on the same page based on the URL using JavaScript, improving the user experience and reducing data transferred. 
+
+This is the aforementioned "you click between the navbar pages and realize you don't like seeing Firefox reload the page every time you click on a link". This is what makes an app feel less like a website and more like an app. The snag here is that Astro is not an SPA framework. It's an MPA framework—a Multi-Page Application. [Astro has a page on the difference](https://docs.astro.build/en/concepts/mpa-vs-spa/). You don't have to read it, though, because the gist is this: if you want single-page speed on a multi-page app, [Hotwire's Turbo](https://turbo.hotwired.dev/) is the solution. [Astro has a plugin for it](https://www.npmjs.com/package/@astrojs/turbolinks)!
+
+Unfortunately, even at time of writing, this plugin is deprecated. A really dissapointing development, all things considered. The alternative Astro recommends is [swup.](https://swup.js.org/) Unfortunately, when I tried swup, it was nowhere near as plug-and-play as Turbo was. It worked, but I didn't want to have to spend time debugging it when Turbo, while deprecated, worked just fine out of the box. There will likely come a time where I must switch away from Turbo, or put in the work to use either swup or Turbo without a plug-and-play integration, but until then, Turbo's the tool of choice.
+
+Here's what it took to implement it:
+
+```fish
+pnpm astro add turbolinks
+```
+
+Remember, @astrojs/turbolinks may be removed entirely by the time you read this, so you may have to use swup instead. If I'm forced to, I'll update this post with the new instructions.
+
+#### Katex
+
+I'm not sure where or when I'll find myself using mathematic notation in markdown(sike! it's right now! $\int_{a}^{b}f(x)dx=F(b)-F(a)$) but, since I take my notes in markdown with latex, I wanted to make sure I could use it here. To add katex support to Astro, all I had to do was install the rehypeKatex plugin:
+
+```fish
+pnpm astro add rehype-katex
+```
+
+...and update my `astro.config.mjs` file accordingly:
+```js
+// ...
+import rehypeKatex from "rehype-katex"; // <-- this line
+
+export default defineConfig({
+  markdown: {
+    rehypePlugins: [[rehypeKatex, { /* Katex plugin options */ }]], // <-- and this line
+// ...
+```
+
+Also, the Katex stylesheet needs to be loaded in order to use Katex. But, since I'm going for performance, it's bad practice to load it on every page. Thus, I added the following to an app.js file I have(though you can incorporate it how you please):
+
+```js
+const katex_stylesheet = '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css integrity="sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ" crossorigin="anonymous">';
+
+// if the page contains an element with the class "katex", add the katex stylesheet
+const add_katex_stylesheet = function() {
+    const katex_elements = document.querySelectorAll('.katex');
+    if (katex_elements.length > 0) {
+        document.head.insertAdjacentHTML('beforeend', katex_stylesheet);
+    }
+}
+```
+
+This function is then called in `document.addEventListener('turbolinks:load', function() { ... })` in the same file. This way, we reduce unnecessary requests. You can call it in whatever way you see fit, though. If you're not using turbolinks, you might want to call it in `window.onload` or something.
+
+#### Syntax Highlighting
+
+I like having the same color scheme across all my development environments. If my VS Code has a certain theme, so does every terminal[^16]. It's only natural I keep that color scheme on my code blocks here! If you ever notice the theme change, know that it's because I changed my VS Code theme too.
+
+Astro uses [Shiki](https://github.com/shikijs/shiki) for syntax highlighting. To use a custom theme, you just have to adjust `astro.config.mjs` again:
+
+```js
+//...
+import customTheme from './monokai.json';
+
+export default defineConfig({
+  markdown: {
+    shikiConfig: {
+      theme: customTheme, // (Shiki also has built-in themes you can choose from here)
+      langs: [],
+      wrap: false
+    }
+// ...
+```
+
+...and add your theme file to the root of your project:
+```
+├── README.md
+├── astro.config.mjs
+├── monokai.json <-- thar she blows!
+├── node_modules/
+├── package.json
+├── pnpm-lock.yaml
+├── public/
+├── src
+│   ├── components/
+│   ├── consts.ts
+│   ├── content/
+│   ├── env.d.ts
+│   ├── layouts/
+│   ├── pages/
+│   └── styles/
+└── tsconfig.json
+```
+
+#### Favicons
+
+I'm a sucker for dark mode, but I recognize many people have this strange mental illness—I pray we find a cure soon—where they prefer light mode. As a more subtle touch, I wanted to make my favicons match your system's theme. If you're in dark mode, you'll get [a light icon](/favicon-dark-mode.ico), and if you're in light mode you'll get [a dark icon](/favicon-light-mode.ico). Here's how that happens:
+
+```js
+// match the favicon to the system's theme
+const set_favicon = function() {
+    console.log('(set_favicon)')
+    const favicon = document.querySelector('link[rel="icon"]');
+    const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (isDarkMode) {
+    favicon.href = '/favicon-dark-mode.ico';
+    } else {
+    favicon.href = '/favicon-light-mode.ico';
+    }
+}
+```
+
+#### Fonts
+
+I picked myself some Google Fonts([Inter](https://fonts.google.com/specimen/Inter) for display and [Fira Code](https://fonts.google.com/specimen/Fira+Code) for her beautiful ligatures), and used the fantastic [Google Webfonts Helper](https://gwfh.mranftl.com/fonts) by [majodev](https://github.com/majodev) to download all the font files I needed locally. Downloading fonts locally is another instance of optimization, and not strictly necessary. Loading from the web is slower than keeping it local.
+
+I added a `fonts.css` file:
+
+<details>
+  <summary> Unfold code. </summary>
+    ```css ::style{.smaller-font}
+    @font-face {
+        font-display: swap;
+        font-family: 'Fira Code';
+        font-style: normal;
+        font-weight: 300;
+        src: url('./fonts/fira-code-v21-latin-300.woff2') format('woff2'),
+            url('./fonts/fira-code-v21-latin-300.woff') format('woff');
+      }
+      @font-face {
+        font-display: swap;
+        font-family: 'Fira Code';
+        font-style: normal;
+        font-weight: 400;
+        src: url('./fonts/fira-code-v21-latin-regular.woff2') format('woff2'),
+            url('./fonts/fira-code-v21-latin-regular.woff') format('woff');
+      }
+      @font-face {
+        font-display: swap;
+        font-family: 'Fira Code';
+        font-style: normal;
+        font-weight: 500;
+        src: url('./fonts/fira-code-v21-latin-500.woff2') format('woff2'),
+            url('./fonts/fira-code-v21-latin-500.woff') format('woff');
+      }
+      @font-face {
+        font-display: swap;
+        font-family: 'Fira Code';
+        font-style: normal;
+        font-weight: 600;
+        src: url('./fonts/fira-code-v21-latin-600.woff2') format('woff2'),
+            url('./fonts/fira-code-v21-latin-600.woff') format('woff');
+      }
+      @font-face {
+        font-display: swap;
+        font-family: 'Fira Code';
+        font-style: normal;
+        font-weight: 700;
+        src: url('./fonts/fira-code-v21-latin-700.woff2') format('woff2'),
+            url('./fonts/fira-code-v21-latin-700.woff') format('woff');
+      }
+    @font-face {
+        font-display: swap;
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 100;
+        src: url('../fonts/inter-v12-latin-100.woff2') format('woff2'),
+            url('../fonts/inter-v12-latin-100.woff') format('woff');
+      }
+      @font-face {
+        font-display: swap;
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 200;
+        src: url('../fonts/inter-v12-latin-200.woff2') format('woff2'),
+            url('../fonts/inter-v12-latin-200.woff') format('woff');
+      }
+      @font-face {
+        font-display: swap;
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 300;
+        src: url('../fonts/inter-v12-latin-300.woff2') format('woff2'),
+            url('../fonts/inter-v12-latin-300.woff') format('woff');
+      }
+      @font-face {
+        font-display: swap;
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        src: url('../fonts/inter-v12-latin-regular.woff2') format('woff2'),
+            url('../fonts/inter-v12-latin-regular.woff') format('woff');
+      }
+      @font-face {
+        font-display: swap;
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 500;
+        src: url('../fonts/inter-v12-latin-500.woff2') format('woff2'),
+            url('../fonts/inter-v12-latin-500.woff') format('woff');
+      }
+      @font-face {
+        font-display: swap;
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 600;
+        src: url('../fonts/inter-v12-latin-600.woff2') format('woff2'),
+            url('../fonts/inter-v12-latin-600.woff') format('woff');
+      }
+      @font-face {
+        font-display: swap;
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 700;
+        src: url('../fonts/inter-v12-latin-700.woff2') format('woff2'),
+            url('../fonts/inter-v12-latin-700.woff') format('woff');
+      }
+      @font-face {
+        font-display: swap;
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 800;
+        src: url('../fonts/inter-v12-latin-800.woff2') format('woff2'),
+            url('../fonts/inter-v12-latin-800.woff') format('woff');
+      }
+      @font-face {
+        font-display: swap;
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 900;
+        src: url('../fonts/inter-v12-latin-900.woff2') format('woff2'),
+            url('../fonts/inter-v12-latin-900.woff') format('woff');
+      }
+  ```
+</details>
+
+...which I copy pasted straight from the [Webfonts Helper's](https://gwfh.mranftl.com/fonts) output. My font files are added as follows:
+
+```
+├── ...
+├── src
+│   ├── ...
+│   └── styles
+│       ├── fonts
+│       │   ├── fira-code-v21-latin-300.woff
+│       │   ├── ...
+│       │   ├── fira-code-v21-latin-regular.woff2
+│       │   ├── inter-v12-latin-100.woff
+│       │   ├── ...
+│       │   └── inter-v12-latin-regular.woff2
+│       ├── fonts.css
+│       └── global.css
+└── ...
+```
+
+#### Copy Buttons
+
+If you haven't noticed it, every code block you've seen so far has an eensy little copy button in the top right corner. Here's how that works:
+
+In app.js:
+
+```js
+const add_copy_buttons = function() {
+    console.log('(add_buttons) Adding copy buttons for code blocks.')
+    const codeBlocks = document.querySelectorAll('pre code');
+    codeBlocks.forEach(function(block) {
+        const button = document.createElement('button');
+        button.classList.add('copy-button');
+        button.innerHTML = '<span>COPY</span>';
+        block.parentNode.appendChild(button);
+    });
+}
+
+const add_copy_button_listeners = function() 
+{
+    console.log('(copy_code) Add copy event listener for code blocks.')
+    const copyButtons = document.querySelectorAll('.copy-button');
+    copyButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            const code = button.parentNode.querySelector('code');
+            const range = document.createRange();
+            range.selectNode(code);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            navigator.clipboard.writeText(code.innerText);
+            window.getSelection().removeAllRanges();
+            button.innerHTML = '<span>COPIED</span>';
+            setTimeout(function() {
+                button.innerHTML = button_text;
+            }, 2000);
+        });
+    });
+}
+```
+
+and in global.css:
+
+```css
+/* copy button */
+pre.astro-code {
+  position: relative;
+}
+
+pre.astro-code>.copy-button {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background-color: var(--item-background-color);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  padding: 0.4rem 0.3rem 0.2rem 0.3rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  font-family: "Inter", sans-serif;
+  font-weight: lighter;
+
+}
+
+.fade-in {
+  animation: fade-in 2s;
+}
+```
+
+#### Line Numbers
+
+I played around with adding line numbers. I didn't end up using it because individual code snippets are removed from the context which line numbers helps provide, but I think it's still worth sharing how I did it:
+
+```css
+/* multiline code block styling */
+pre {
+  font-family: "Fira Code", monospace;
+  background-color: var(--item-background-color);
+  border: 1px solid var(--border-color);
+  padding: 1rem;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-size: 11pt;
+  /* shiki line numbers */
+  counter-reset: step;
+  counter-increment: step calc(var(--start, 1) - 1);
+}
+
+pre code {
+  background-color: inherit;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+}
+
+/* shiki line numbers */
+pre code .line:before {
+  counter-increment: step;
+  content: counter(step);
+  display: inline-block;
+  width: 2em;
+  margin-right: 1em;
+  color: #525053;
+}
+```
+
+#### The Missing Attribute
+
+Astro and Github pages decided to cook away the `lang="en"` attribute on the `<html>` element somewhere in the build process. I have no idea whether it's an Astro issue or whether I fumbled somewhere. Either way, here's my workaround:
+
+```js
+document.documentElement.lang = 'en';
+```
+
+I put this in my `on:load` event listener.
+
+#### Mailto Obfuscation
+
+I don't want my email address to be scraped by bots, so I've done some very amateur obfuscation.
+
+Here's what the HTML looks like:
+
+```html
+<a href="mailto:lu[at]mirth[dot]cc" target="_blank" rel="noopener noreferrer">EMAIL</a>
+```
+
+...and here's the Javascript that fixes it:
+
+```js
+const fix_mailto_links = function() {
+    console.log('(fix_mailto_links)')
+    // fix obfuscated mailto links
+    const mailto_links = document.querySelectorAll('a[href^="mailto:"]');
+    mailto_links.forEach(function(link) {
+            // replace [at] with @, and [dot] with .
+            email = link.href.replace('[at]', '@').replace('[dot]', '.');
+            link.href = email;
+        }
+    );
+}
+```
+
+#### Neat Little Tag Icons
+
+I wanted to add some icons to the tags on the project posts to show which technologies were used. I used [Devicon](https://devicon.dev/) for this.
+
+#### Summary
+
+Here's what my event listener for `turbolinks:load` looks like:
+
+```js 
+// turbolinks onload do things
+document.addEventListener('turbolinks:load', function() { 
+    set_favicon();
+    fix_mailto_links();
+    console.log('(turbolinks:load)')
+    console.log('%cNOTE: Astro + Github Pages fuckery is getting rid of the lang attribute on the html element. We are setting it in JS as a workaround.','color: yellow;')
+    document.documentElement.lang = 'en';
+    if (!window.location.pathname.includes('/blog/') && !window.location.pathname.includes('/work/')) {
+        console.log('(turbolinks:load) Not on blog or work page. Returning.')
+        return;
+    }
+    add_copy_buttons();
+    add_copy_button_listeners();
+    add_katex_stylesheet();
+    add_syntax_highlighting_stylesheet();
+});
+```
+
+All this is just the tip of the iceberg in terms of the amount of work this site required. Often, tangling with Google Lighthouse was huge timesink. Many small changes need to be made. For example, the GIF-like animations on this page are actually MP4 files because they take up much less space, and as such, load more quickly. There are many tiny little CSS tweaks that needed to be made to not just make the site look good, but to make it even usable *at all*. There are too many to go into detail here. If you encounter the same issues I did, good luck. I haven't the energy to help. Trudge on without me, soldier, it's too late for me.
+
+As a final side note, the CSS for this project was definitely a bit of an ordeal. I'd love to elaborate on it here, but I feel it would be much more useful for you to just hit `F12` and check it out yourself. Really just good practice for anybody who has the misfortune of having to use CSS.
+
+## Conclusion
+
+I asked ChatGPT what my conclusion paragraph should look like[^17] and it told me to waffle about how "rewarding" the "journey of building a personal website" was. Real talk? This was a pain in the ass. It was rewarding in that I find programming intellectually stimulating, but if I had a magic wand, I would've skpped straight to this point—I just want to post things! Every time I finish a project I feel like my brain has been forcefully rewired, somehow more adapted to handlings the one-error-after-another stream that programming so often devolves into.
+
+The point is this: welcome to [`[MIRTH.CC]`](https://mirth.cc). I hope you enjoyed your stay. 
+
+P.S: Take a glance at the footnotes, I had fun writing them.
+
+
+
+[^1]: And, soon enough(god forbid), Web 3.0. (Get back in your cage, Web 3.0! Stay!)
+[^2]: Keep It Simple, Stupid
+[^3]: Credit to Kurt Okimoto at UIC for teaching me about these. [MUDs](https://medium.com/@williamson.f93/multi-user-dungeons-muds-what-are-they-and-how-to-play-af3ec0f29f4a) are a fascinating piece of web and computer history.
+[^4]: I hate to show my hand on my opinion of crypto(as I do really wish I could love it), but here's a great video on the topic: [Line Goes Up — The Problem With NFTs(Folding Ideas)](https://www.youtube.com/watch?v=ZKwqNgG-Sv4). The relevant piece I'm referencing here is the idea that a currency *cannot* be *deflationary*. If you want people to use your thing as a currency, maybe consider not making it so that you're incentivized to hold it like an asset instead of spend it. There's a reason the Fed trys to keep the interest rates a couple ticks above 0%—if your money is worth very slightly more today than tomorrow, you're much more likely to spend it. (And look at that, now you've got an economy!)
+[^5]: It won't take my job if I learn it well and stay at the forefront, right? Right?!
+[^6]: [Tom Scott has some great words on this](https://www.youtube.com/watch?v=LZM9YdO_QKk)
+[^7]: I'd love to look into the etymology of this word someday. [Merriam Webster](https://www.merriam-webster.com/words-at-play/words-were-watching-normie-normcore) says: "The term normie has emerged as both a noun and an adjective referring to one whose tastes, lifestyle, habits, and attitude are mainstream and far from the cutting edge, or a person who is otherwise not notable or remarkable."
+[^8]: I love Firefox. She is my ride or die. Chrome-heads back off. Brave, Edge, and Vivaldi users can go too. Safari users, you're on thin ice.
+[^9]: Mine's $20/year at [Google Domains](https://domains.google/). [Cloudflare](https://www.cloudflare.com/products/registrar/) might be a good lead for as-cheap-as-possible domain registration, since I've heard they sell each domain at-cost. Not sure how that works, but it's worth looking into. I stick with Google because I want my domain to stick around for a while, and I trust Google to not go out of business in the next decade years. More or less. (Not that it matters anyway, considering I've changed my domain name 3 times in the last half-decade.)
+[^10]: Not sure if I'll change this logo anytime soon. If I don't, go ahead and take a gander. You'll know I changed it if you don't see a little beige triangle of interlocking letters on top of a dark purple background.
+[^11]: Oh, you self-congratulatory fuck.
+[^12]: [Here's where the weird word choice came from](https://youtu.be/ws8bH2e5Nmc?t=76).
+[^13]: Believe me, I delight in torturing them by explaining it anyway. I'm a monster.
+[^14]: Responses include "Python, because it's simpler" and "C++, because I know it better", and just about nothing else. Yes I'm generalizing, but I'm also bummed that I haven't met enough people who *don't* meet the pattern to be able to confidently believe myself when I *tell* you I'm generalizing.
+[^15]: Not to say other students are somehow "doing it wrong". The field is complicated, unpredictable, and, honestly, if you have your head screwed on right, you can get your bearings even if "react" is a verb and "rust" is what happens to your uncle's beater of a car.
+[^16]: [iTerm2](https://iterm2.com/) and [Fish](https://fishshell.com/) are my terminal and shell of choice. iTerm2 has a fantastic feature called [hotkey window](https://iterm2.com/features.html#hotkey-window). All I have to do is double-tap the `option` key and I've got a terminal at my fingertips. I can't recommend it enough.
+[^17]: Using ChatGPT to replace your writing is low in character, but using it to help inspire you and understand/explore your ideas should be the norm.

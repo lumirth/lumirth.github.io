@@ -1,0 +1,225 @@
+---
+export interface CardProps {
+  title: string;
+  href: string;
+  date: Date;
+  description: string;
+  tags_icon?: string[];
+  tags_text?: string[];
+  image_source?: string;
+  image_alt?: string;
+  tags_enabled: boolean;
+  link_enabled: boolean;
+}
+
+const { title, href, date, description, tags_icon, tags_text, image_source, image_alt, tags_enabled, link_enabled } = Astro.props as CardProps;
+
+const ISO_date = new Date(date.valueOf()).toISOString().split('T')[0];
+---
+
+{ 
+  tags_enabled &&
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css"> 
+}
+<div class="card-container">
+  <div class="card">
+    <div class="card-content">
+      <div class="card-title">
+        {
+          link_enabled ? <a href={href} class="card-title-text-link">
+            {title}  
+          </a> :
+          <p class="card-title-text">
+            {title}
+          </p>
+        }
+        <div class="card-date">{ISO_date}</div>
+      </div>
+      <div class="card-separator"></div>
+      <div class="card-info">
+
+        <div class="card-description">{description}</div>
+        {
+          tags_enabled &&
+          <div class="card-tags">
+            <ul class="card-tags-list">
+              { 
+                tags_icon && tags_icon.map((tag: string) => (
+                  <li><i class={tag}></i></li>
+                  ))
+                }
+                {
+                  tags_text && tags_text.map((tag: string) => (
+                    <li>{tag}</li>
+                    ))
+                  }
+                  </ul>
+                  </div>
+                }
+      </div>
+    </div>
+    {
+      image_source && 
+      <div class="card-image">
+        <img src={image_source} alt={image_alt}>
+      </div>
+    }
+  </div>
+</div>
+
+<style>
+.card-separator {
+  width: 100%;
+  height: 1px;
+  background-color: var(--border-color);
+  margin: 8px 0;
+}
+
+.card-container {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.card {
+  max-width: 600px;
+  width: 100%;
+  background-color: var(--item-background-color);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  border: 1px solid var(--border-color);
+  padding: 10px;
+  position: relative;
+}
+
+.card-content {
+  flex: 1;
+  line-height: initial;
+}
+
+.card-info {
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+  gap: 1rem;
+}
+
+.card-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-right: 3px;
+  gap: 1rem;
+}
+.card-title-text {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--power-text-color);
+  transition: all 0.2s ease-in-out;
+}
+
+.card-date {
+  height: 100%;
+  font-family: "Fira Code", monospace;
+  font-size: 14px;
+  color: var(--power-text-color);
+}
+
+.card-title-text-link {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: underline;
+  text-transform: uppercase;
+  color: var(--power-text-color);
+  cursor: pointer;
+  text-underline-offset: 0.1rem;
+  text-decoration-thickness: 0.075rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.card-title-text-link:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 0.075rem;
+  text-underline-offset: 0.25rem;
+  color: var(--accent-color);
+  transition: all 0.2s ease-in-out;
+}
+
+/* add padding to top of title text on firefox browser */
+@-moz-document url-prefix() {
+  .card-title-text {
+    padding-top: 0.1rem;
+  }
+  .card-title-text-link {
+    padding-top: 0.1rem;
+  }
+}
+.card-description {
+  width: 100%;
+  color: var(--faded-text-color);
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.card-tags {
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: right;
+  justify-content: flex-start;
+}
+
+.card-tags-list {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card-tags li {
+  flex-shrink: 0;
+  font-size: 12px;
+  background-color: (--item-background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 4px 6px;
+  margin: 2px;
+}
+
+.card-image {
+  /* remove element by default */
+  display: none;
+}
+
+/* make image visible on desktop */
+@media screen and (min-width: 768px) {
+  .card-image {
+    display: block;
+    object-fit: cover;
+    height: 100px;
+    width: 100px;
+    overflow: hidden;
+    padding-left: 1rem;
+  }
+
+  .card-image img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+}
+</style>
