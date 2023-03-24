@@ -9,9 +9,9 @@ import customTheme from './monokai.json';
 import turbolinks from "@astrojs/turbolinks";
 import image from "@astrojs/image";
 import webmanifest from "astro-webmanifest";
+import compress from "astro-compress";
 
 /** @type {import('astro-m2dx').Options} */
-import compress from "astro-compress";
 const m2dxOptions = {
   styleDirectives: true
 };

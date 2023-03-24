@@ -35,7 +35,7 @@ const add_copy_button_listeners = function()
 
 // turbolinks onload do things
 document.addEventListener('turbolinks:load', function() { 
-    set_favicon();
+    apply_theme_colors_dynamically();
     fix_mailto_links();
     console.log('%c TODO: we dont need to add copy buttons and copy button listeners on non-code-containing pages. Date: 2023-03-19','color: blue;')
     console.log('(turbolinks:load)')
@@ -50,22 +50,22 @@ document.addEventListener('turbolinks:load', function() {
     add_katex_stylesheet();
 });
 
-const set_favicon = function() {
-    console.log('(set_favicon)')
-    // change favicon to favicon-dark-mode.ico when in dark mode
-    // change favicon to favicon-light-mode.ico when in light mode
-    const favicon = document.querySelector('link[rel="icon"]');
+// const set_favicon = function() {
+//     console.log('(set_favicon)')
+//     // change favicon to favicon-dark-mode.ico when in dark mode
+//     // change favicon to favicon-light-mode.ico when in light mode
+//     const favicon = document.querySelector('link[rel="icon"]');
 
-    // detect system theme
-    const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+//     // detect system theme
+//     const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-    // change favicon based on system theme
-    if (isDarkMode) {
-    favicon.href = '/favicon-dark-mode.ico';
-    } else {
-    favicon.href = '/favicon-light-mode.ico';
-    }
-}
+//     // change favicon based on system theme
+//     if (isDarkMode) {
+//     favicon.href = '/src/assets/favicon-dark-mode.ico';
+//     } else {
+//     favicon.href = '/src/assets/favicon-light-mode.ico';
+//     }
+// }
 
 const katex_stylesheet = '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css" \
 integrity="sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ" crossorigin="anonymous">';
@@ -90,3 +90,23 @@ const fix_mailto_links = function() {
         }
     );
 }
+
+const apply_theme_colors_dynamically = function() {
+    const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+    // if dark mode is enabled, set the status bar color to black
+    if (isDarkMode) {
+        document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]').setAttribute('content', 'black-translucent');
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#111');
+    }
+    // if dark mode is not enabled, set the status bar color to white
+    else {
+        document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]').setAttribute('content', 'default');
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff');
+    }
+}
+
+// event listener for change system theme
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+    apply_theme_colors_dynamically();
+});
