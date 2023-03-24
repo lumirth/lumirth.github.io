@@ -67,7 +67,9 @@ const fix_mailto_links = function() {
     const mailto_links = document.querySelectorAll('a[href^="mailto:"]');
     mailto_links.forEach(function(link) {
             // replace [at] with @, and [dot] with .
-            email = link.href.replace('%5B', '[').replace('%5D', ']').replace('[at]', '@').replace('[dot]', '.');
+            email = link.href.replace('%5B', '[').replace('%5D', ']').replace('%5B', '[').replace('%5D', ']');
+            email = email.replace('[at]', '@')
+            email = email.replace('[dot]', '.');
             link.href = email;
         
         }
