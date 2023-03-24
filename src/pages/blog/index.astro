@@ -14,8 +14,8 @@ const is_posts = posts.length > 0;
 <meta charset="utf-8" />
 <!DOCTYPE html>
 <html lang="en">
-	<Main page_title="MIRTH.CC/BLOG">
-		{ !is_posts && <h1>Sorry, no posts yet!</h1> }
+	<Main page_title="BLOG">
+		{ !is_posts && <code>NO POSTS AVAILABLE</code><br/> }
 		{
 			posts.map((post) => (
 				<Card
