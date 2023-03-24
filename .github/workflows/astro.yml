@@ -88,7 +88,7 @@ jobs:
           from PIL import Image
 
           folder_path = '${{ env.BUILD_PATH }}/dist'
-          quality = 50
+          quality = 70
           max_width = 600
 
           for filename in os.listdir(folder_path):
