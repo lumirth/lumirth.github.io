@@ -13,9 +13,10 @@ export interface CardProps {
   image_alt?: string;
   tags_enabled: boolean;
   link_enabled: boolean;
+  link_external?: false;
 }
 
-const { title, href, date, description, tags_icon, tags_text, image_source, image_alt, tags_enabled, link_enabled } = Astro.props as CardProps;
+const { title, href, date, description, tags_icon, tags_text, image_source, image_alt, tags_enabled, link_enabled, link_external } = Astro.props as CardProps;
 
 const ISO_date = date ? new Date(date).toISOString().split('T')[0] : null;
 const md_description = md.renderInline(description);
@@ -29,10 +30,17 @@ const md_description = md.renderInline(description);
   <div class="card">
     <div class="card-content">
       <div class="card-title">
-        {
-          link_enabled ? <a href={href} class="card-title-text-link">
+        { link_enabled && link_external &&
+          <a data-turbo="false" href={href} class="card-title-text-link" target="_blank" rel="noopener">
             {title}  
-          </a> :
+          </a>
+        }
+        { link_enabled && !link_external &&
+          <a data-turbo="false" href={href} class="card-title-text-link">
+            {title}  
+          </a>
+        }
+        { !link_enabled &&
           <p class="card-title-text">
             {title}
           </p>
