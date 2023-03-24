@@ -429,3 +429,12 @@ code {
   white-space: -o-pre-wrap;    /* Opera 7 */
   word-wrap: break-word;       /* Internet Explorer 5.5+ */
  }
+
+/* this doesn't work in the astro component */
+.card-description a {
+  color: var(--faded-text-color);
+}
+
+.card-description a:hover {
+  color: var(--accent-color);
+}
