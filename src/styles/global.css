@@ -438,3 +438,12 @@ code {
 .card-description a:hover {
   color: var(--accent-color);
 }
+
+.no-posts {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-size: 1.5rem;
+  color: var(--faded-text-color);
+}

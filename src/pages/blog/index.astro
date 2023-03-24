@@ -15,7 +15,7 @@ const is_posts = posts.length > 0;
 <!DOCTYPE html>
 <html lang="en">
 	<Main page_title="BLOG">
-		{ !is_posts && <code>NO POSTS AVAILABLE</code><br/> }
+		{ !is_posts && <code class="no-posts">NO POSTS AVAILABLE</code><br/> }
 		{
 			posts.map((post) => (
 				<Card
