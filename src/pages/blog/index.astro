@@ -4,9 +4,13 @@ import Card from '../../components/Card.astro';
 import Main from '../../components/Main.astro';
 
 // if not visible, don't render
-const posts = (await getCollection('blog')).sort(
-	(b, a) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
-).filter((post) => post.data.visible);
+const all_posts = (await getCollection('work')).filter((post) => post.data.visible);
+const dated_posts = all_posts.filter((post) => post.data.pubDate);
+const undated_posts = all_posts.filter((post) => !post.data.pubDate);
+
+const posts = dated_posts.sort(
+	(b, a) => (new Date(String(a.data.pubDate))).valueOf() - (new Date(String(b.data.pubDate))).valueOf()
+).concat(undated_posts);
 
 const is_posts = posts.length > 0;
 ---
