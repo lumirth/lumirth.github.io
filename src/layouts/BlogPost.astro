@@ -1,11 +1,9 @@
 ---
-import type { CollectionEntry } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Card from '../components/Card.astro';
-import { Image, Picture } from '@astrojs/image/components';
 
 const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 ---
@@ -13,8 +11,6 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 <html lang="en">
 	<head>
 		<BaseHead title={title} description={description} />
-		<style>
-		</style>
 	</head>
 
 	<body>
@@ -25,7 +21,6 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 		<main>
 			<Card title={title} date={pubDate} description={description} link_enabled={false} />
 			<article>
-				<hr />
 				{
 					updatedDate && (
 						<div class="last-updated-on">
@@ -33,13 +28,10 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 						</div>
 					)
 				}
+				<hr />
 				<slot />
 			</article>
 		</main>
 		<Footer />
 	</body>
 </html>
-
-
-<style>
-</style>
