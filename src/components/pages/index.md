@@ -3,7 +3,7 @@ I am Lukas. or `lumirth`.
 I wear a number of hats.
 
 - Student of Computer Science + Philosophy @ [Illinois](https://cs.illinois.edu)
-- Other things, probably.
+- For hire. [Hire me](/info).
 
 ---
 
