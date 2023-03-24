@@ -303,6 +303,10 @@ table::-webkit-scrollbar-thumb {
 
 /* desktop aside styling */
 @media screen and (min-width: 769px) {
+  .aside-left p, .aside-right p {
+    margin: 0;
+    padding: 0;
+  }
   .aside-left {
     float: left;
     margin-top: 1.5rem;
