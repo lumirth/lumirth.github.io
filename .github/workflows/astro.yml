@@ -96,8 +96,6 @@ jobs:
                   image_path = os.path.join(folder_path, filename)
                   img = Image.open(image_path)
                   old_size = os.stat(image_path).st_size
-                  print(f'{filename}: {old_size/1024:.2f} KB')
-                  print(f'{filename}: {img.size[0]}x{img.size[1]}')
 
                   if img.width > max_width:
                       ratio = max_width / img.width
@@ -106,9 +104,6 @@ jobs:
 
                   img.save(image_path, optimize=True, quality=quality)
                   new_size = os.stat(image_path).st_size
-                  print(f'{filename} (compressed): {new_size/1024:.2f} KB')
-                  print(f'{filename} (compressed): {img.size[0]}x{img.size[1]}')
-
           "
       # REPLACE THE ABOVE WITH CACHING/INSTALLING AND USING PILLOW
       - name: Upload artifact
