@@ -4,7 +4,7 @@ import Card from '../../components/Card.astro';
 import Main from '../../components/Main.astro';
 
 // if not visible, don't render
-const all_posts = (await getCollection('work')).filter((post) => post.data.visible);
+const all_posts = (await getCollection('blog')).filter((post) => post.data.visible);
 const dated_posts = all_posts.filter((post) => post.data.pubDate);
 const undated_posts = all_posts.filter((post) => !post.data.pubDate);
 
