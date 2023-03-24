@@ -21,6 +21,7 @@
     "astro-m2dx": "^0.7.15",
     "astro-webmanifest": "^0.5.1",
     "import": "^0.0.6",
+    "markdown-it": "^13.0.1",
     "rehype-katex": "^6.0.2",
     "remark-directive": "^2.0.1",
     "remark-math": "^5.1.1",
