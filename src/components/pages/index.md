@@ -4,6 +4,7 @@ I wear a number of hats.
 
 - Student of Computer Science + Philosophy @ [Illinois](https://cs.illinois.edu)
 - For hire. [Hire me](/info).
+- Other things, probably.
 
 ---
 
