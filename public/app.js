@@ -33,28 +33,12 @@ const add_copy_button_listeners = function()
     });
 }
 
-// turbolinks onload do things
-document.addEventListener('turbolinks:load', function() { 
-    apply_theme_colors_dynamically();
-    fix_mailto_links();
-    console.log('%c TODO: we dont need to add copy buttons and copy button listeners on non-code-containing pages. Date: 2023-03-19','color: blue;')
-    console.log('(turbolinks:load)')
-    console.log('%cNOTE: Astro + Github Pages fuckery is getting rid of the lang attribute on the html element. We are setting it in JS as a workaround.','color: yellow;')
-    document.documentElement.lang = 'en';
-    if (!window.location.pathname.includes('/blog/') && !window.location.pathname.includes('/work/')) {
-        console.log('(turbolinks:load) Not on blog or work page. Returning.')
-        return;
-    }
-    add_copy_buttons();
-    add_copy_button_listeners();
-    add_katex_stylesheet();
-});
-
 const katex_stylesheet = '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css" \
 integrity="sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ" crossorigin="anonymous">';
 
 // if the page contains an element with the class "katex", add the katex stylesheet
 const add_katex_stylesheet = function() {
+    console.log('(add_katex_stylesheet) Adding katex stylesheet if needed.')
     const katex_elements = document.querySelectorAll('.katex');
     if (katex_elements.length > 0) {
         document.head.insertAdjacentHTML('beforeend', katex_stylesheet);
@@ -77,6 +61,7 @@ const fix_mailto_links = function() {
 }
 
 const apply_theme_colors_dynamically = function() {
+    console.log('(apply_theme_colors_dynamically) Applying theme colors dynamically.')
     const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
     // if dark mode is enabled, set the status bar color to black
@@ -91,7 +76,27 @@ const apply_theme_colors_dynamically = function() {
     }
 }
 
+// turbolinks onload do things
+document.addEventListener('turbolinks:load', function() { 
+    console.log('%c TODO: we dont need to add copy buttons and copy button listeners on non-code-containing pages. Date: 2023-03-19','color: blue;')
+    console.log('(turbolinks:load)')
+
+    apply_theme_colors_dynamically();
+    fix_mailto_links();
+    console.log('%cNOTE: Astro + Github Pages fuckery is getting rid of the lang attribute on the html element. We are setting it in JS as a workaround.','color: yellow;')
+    document.documentElement.lang = 'en';
+    if (!window.location.pathname.includes('/blog/') && !window.location.pathname.includes('/work/')) {
+        console.log('(turbolinks:load) Not on blog or work page. Returning.')
+        return;
+    }
+    
+    add_copy_buttons();
+    add_copy_button_listeners();
+    add_katex_stylesheet();
+});
+
 // event listener for change system theme
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
     apply_theme_colors_dynamically();
 });
+

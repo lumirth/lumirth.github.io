@@ -24,7 +24,8 @@ code {
 }
 
 /* dynamic image sizing */
-img, video {
+img,
+video {
   width: 100%;
   height: auto;
 }
@@ -301,12 +302,14 @@ table::-webkit-scrollbar-thumb {
   border: 1px solid var(--border-color);
 }
 
+.aside-left p,
+.aside-right p {
+  margin: 0;
+  padding: 0;
+}
+
 /* desktop aside styling */
 @media screen and (min-width: 769px) {
-  .aside-left p, .aside-right p {
-    margin: 0;
-    padding: 0;
-  }
   .aside-left {
     float: left;
     margin-top: 1.5rem;
@@ -327,10 +330,10 @@ table::-webkit-scrollbar-thumb {
     border: 1px solid var(--border-color);
   }
 
-  .aside-left img, .aside-right img {
+  .aside-left img,
+  .aside-right img {
     width: 100%;
   }
-
 }
 
 /* dark mode */
@@ -354,18 +357,18 @@ table::-webkit-scrollbar-thumb {
   background: url("https://api.iconify.design/simple-icons/astro.svg") no-repeat
     center center / contain;
   content: url("https://api.iconify.design/simple-icons/astro.svg");
-  filter: invert(0%) sepia(5%) saturate(144%) hue-rotate(317deg) brightness(87%) contrast(87%);
+  filter: invert(0%) sepia(5%) saturate(144%) hue-rotate(317deg) brightness(87%)
+    contrast(87%);
 }
 
 @media (prefers-color-scheme: dark) {
   .astro-icon {
-    filter: invert(88%) sepia(100%) saturate(138%) hue-rotate(197deg) brightness(107%) contrast(101%);
+    filter: invert(88%) sepia(100%) saturate(138%) hue-rotate(197deg)
+      brightness(107%) contrast(101%);
   }
 }
 
-/* make blog-cards wider on larger screens */
-/* @media (min-width: 1280px) {  .blog-card {    max-width: 800px;  }} */
-/* blog banner styling */
+/* Blog banner styling */
 hr {
   border: 0;
   border-top: 1px solid var(--border-color);
@@ -381,41 +384,42 @@ hr {
 }
 
 .image-banner {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
   max-width: 600px;
   max-height: 200px;
   overflow: hidden;
   object-fit: cover;
   width: 100%;
-  background-color: var(--item-background-color);
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  border: 1px solid var(--border-color);
   padding: 10px;
+  background-color: var(--item-background-color);
+  border: 1px solid var(--border-color);
   position: relative;
 }
 
-/* work banner styling */
+/* Work banner styling */
 article {
   margin-top: 24px;
 }
 
-sup a {
-  color: var(--faded-text-color);
-  text-decoration: none;
-}
-
+sup a,
 .data-footnote-backref {
   color: var(--faded-text-color);
   text-decoration: none;
 }
 
+.data-footnote-backref:hover {
+  color: var(--accent-color);
+}
+
 .last-updated-on {
-  font-size: 0.8rem;
-  color: var(--faded-text-color);
   display: flex;
   justify-content: center;
   padding-top: 0.75rem;
+  font-size: 0.8rem;
+  color: var(--faded-text-color);
 }
 
 .smaller-font {
@@ -423,14 +427,11 @@ sup a {
 }
 
 code {
-  white-space: pre-wrap;       /* css-3 */
-  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
-  white-space: -pre-wrap;      /* Opera 4-6 */
-  white-space: -o-pre-wrap;    /* Opera 7 */
-  word-wrap: break-word;       /* Internet Explorer 5.5+ */
- }
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
 
-/* this doesn't work in the astro component */
+/* This doesn't work in the Astro component */
 .card-description a {
   color: var(--faded-text-color);
 }
