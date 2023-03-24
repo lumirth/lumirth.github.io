@@ -354,6 +354,13 @@ table::-webkit-scrollbar-thumb {
   background: url("https://api.iconify.design/simple-icons/astro.svg") no-repeat
     center center / contain;
   content: url("https://api.iconify.design/simple-icons/astro.svg");
+  filter: invert(0%) sepia(5%) saturate(144%) hue-rotate(317deg) brightness(87%) contrast(87%);
+}
+
+@media (prefers-color-scheme: dark) {
+  .astro-icon {
+    filter: invert(88%) sepia(100%) saturate(138%) hue-rotate(197deg) brightness(107%) contrast(101%);
+  }
 }
 
 /* make blog-cards wider on larger screens */

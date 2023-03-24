@@ -1,0 +1,61 @@
+---
+title: "Mini-Projects"
+description: "All the projects that weren't big enough to get their own page. Fixing the UIUC course API, a website built in vanilla HTML/CSS/JS, and a few other odds and ends."
+pubDate: "Mar 17 2023"
+updatedDate: "Mar 23 2023"
+banner_source: "/on-the-road.jpg"
+image_source: "/folder.svg"
+image_alt: "A view of the University of Illinois on Gregory Drive, the camera is on the ground. No people or cars are seen. Brick buildings. It's almost sunset."
+tags_icon: []
+tags_text: []
+tags: []
+---
+
+import Card from '../../components/Card.astro';
+
+This is a collection of projects that were too small or simple to warrant their own page(or just weren't interesting enough to write about). I've included them here for completeness.
+<br/>
+
+<Card 
+    title="fix-cisapi"
+    href="https://mirth.cc/fix-cisapi"
+    date={new Date("2023-03-21")}
+    description="A dead-simple tool that fixes the example URLs on UIUC's CISAPI documentation page. "
+    tags_icon={[ "devicon-svelte-plain colored" ]}
+    tags_text={[]}
+    link_enabled={true}
+    tags_enabled={true}
+/>
+
+<Card 
+    title="VanillaShake"
+    href="https://mirth.cc/vanillashake"
+    date={new Date("2022-07-20")}
+    description="A site built as-assigned for the UIC Technologys Solution SDD internship program, built in vanilla(haha, get it?) HTML, CSS, and Javascript."
+    tags_icon={[ "devicon-html5-plain colored","devicon-css3-plain colored", "devicon-javascript-plain colored" ]}
+    tags_text={[]}
+    link_enabled={true}
+    tags_enabled={true}
+/>
+
+<Card 
+    title="PickyPixels"
+    href="https://github.com/lumirth/pickypixels"
+    date={new Date("2022-01-18")}
+    description="A GUI interface built in Python to filter user videos by resolution, either moving them into a specified output folder or deleting them, depending on user preference."
+    tags_icon={[ "devicon-python-plain colored"]}
+    tags_text={[]}
+    link_enabled={true}
+    tags_enabled={true}
+/>
+
+<Card 
+    title="Divvy Analysis"
+    href="https://github.com/lumirth/divvy"
+    date={new Date("2021-09-16")}
+    description="A program that analyzes Divvy's trip data from the Chicago bike sharing company. Cleans and manipulates data to improve accuracy and ease of use. "
+    tags_icon={[ "devicon-cplusplus-plain colored" ]}
+    tags_text={[]}
+    link_enabled={true}
+    tags_enabled={true}
+/>
