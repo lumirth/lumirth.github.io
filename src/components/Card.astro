@@ -2,7 +2,7 @@
 export interface CardProps {
   title: string;
   href: string;
-  date: Date;
+  date?: string;
   description: string;
   tags_icon?: string[];
   tags_text?: string[];
@@ -14,7 +14,7 @@ export interface CardProps {
 
 const { title, href, date, description, tags_icon, tags_text, image_source, image_alt, tags_enabled, link_enabled } = Astro.props as CardProps;
 
-const ISO_date = new Date(date.valueOf()).toISOString().split('T')[0];
+const ISO_date = date ? new Date(date).toISOString().split('T')[0] : null;
 ---
 
 { 
@@ -33,7 +33,9 @@ const ISO_date = new Date(date.valueOf()).toISOString().split('T')[0];
             {title}
           </p>
         }
-        <div class="card-date">{ISO_date}</div>
+        { date &&
+          <div class="card-date">{ISO_date}</div>
+        }
       </div>
       <div class="card-separator"></div>
       <div class="card-info">
