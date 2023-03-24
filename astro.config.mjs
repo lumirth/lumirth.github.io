@@ -38,7 +38,7 @@ export default defineConfig({
       insertFaviconLinks: false,
       insertAppleTouchLinks: true
     }
-  }), compress()],
+  })],
   markdown: {
     remarkPlugins: [remarkMath, remarkDirective, [m2dx, m2dxOptions]],
     rehypePlugins: [[rehypeKatex, {

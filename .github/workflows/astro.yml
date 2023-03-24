@@ -87,31 +87,28 @@ jobs:
           import os
           from PIL import Image
 
-          # Path to the folder containing the images
           folder_path = '${{ env.BUILD_PATH }}/dist'
-
-          # Quality of the compressed images (0-100)
           quality = 50
+          max_width = 600
 
-          # Maximum width of the resized images
-          max_width = 800
-
-          # Loop through all files in the folder
           for filename in os.listdir(folder_path):
-              # Check if the file is an image
               if filename.endswith('.jpg') or filename.endswith('.jpeg') or filename.endswith('.png'):
-                  # Open the image file
                   image_path = os.path.join(folder_path, filename)
                   img = Image.open(image_path)
+                  old_size = os.stat(image_path).st_size
+                  print(f'{filename}: {old_size/1024:.2f} KB')
+                  print(f'{filename}: {img.size[0]}x{img.size[1]}')
 
-                  # Resize the image if its width is greater than the maximum width
                   if img.width > max_width:
                       ratio = max_width / img.width
                       new_height = int(img.height * ratio)
                       img = img.resize((max_width, new_height))
 
-                  # Compress the image and save it with the same filename
                   img.save(image_path, optimize=True, quality=quality)
+                  new_size = os.stat(image_path).st_size
+                  print(f'{filename} (compressed): {new_size/1024:.2f} KB')
+                  print(f'{filename} (compressed): {img.size[0]}x{img.size[1]}')
+
           "
       # REPLACE THE ABOVE WITH CACHING/INSTALLING AND USING PILLOW
       - name: Upload artifact
