@@ -6,6 +6,8 @@ I wear a number of hats.
 - For hire. [Hire me](/info).
 - Other things, probably.
 
+Check out my [projects](/work).
+
 ---
 
 <!-- 
