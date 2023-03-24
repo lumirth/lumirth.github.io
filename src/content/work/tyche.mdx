@@ -1,18 +1,80 @@
 ---
 title: "Tyche"
-description: "An infinitely extensible modular and unopinionated dice notation. Comes with a NPM module, a Python module, a CLI, and a web app."
+description: "An infinitely extensible modular and unopinionated dice notation and parser. Comes with a NPM module, a Python module, a CLI, and a web app."
 pubDate: "Mar 25 2023"
 updatedDate: "Mar 24 2023"
 banner_source: "/tyche-banner-alt.svg"
 image_source: "/tyche.svg"
-image_alt: "A swirly sparkly combination of colors. Perhaps a bubble or glass or some kinds of paints. No distinct objects can be made out. "
+image_alt: "The Tyche logo. The subtext reads 'The Extensible Dice Notation'."
 tags_icon:
-    - "devicon-python-plain colored"
-    - "devicon-nodejs-plain colored"
-    - "devicon-npm-original-wordmark colored"
-    - "devicon-rust-plain"
+  - "devicon-python-plain colored"
+  - "devicon-nodejs-plain colored"
+  - "devicon-npm-original-wordmark colored"
+  - "devicon-rust-plain"
 
 tags_text: []
 tags: []
 visible: false
 ---
+
+It's pronounced ["tishe"](https://www.google.com/search?q=tyche+pronunciation)(try saying "ties" with a lisp), like after the Greek goddess of fortune.
+
+Welcome to a **new standard for dice roll notation**. One standard notation to rule them all, to serve every purpose and every game. Welcome to Tyche.
+
+> # ⚠️ Quick note for developers
+>
+> Do you want to use Tyche in your project? We've made it easy. We offer the following:
+>
+> For development:
+>
+> - TycheJS, an NPM module for JavaScript and TypeScript
+> - TychePy, a Python module
+>
+> Both of which are built off of tyche-core, a Rust crate.
+>
+> For testing:
+>
+> - PlutusCLI, a command line interface
+> - PlutusWeb, a web app interface
+
+## Tyche Notation
+
+> Draft Version 0.1.0
+
+The Tyche notation follows the same patterns you're already used to:
+
+> `XdY` — rolls `X` dice with `Y` sides
+
+Imagine a basic dice calculator. All the features you'd expect are available:
+
+> `2d6 + 4 - 1` — arithmetic with dice
+>
+> `4d10 / 2 * 3` — division and multiplication
+>
+> `3d6 + (d4 / 2)` — parentheses for order of operations
+>
+> `2d6, 4d8` — multiple dice rolls
+>
+> `d4, 2d6 + 3, (d20/3) + (1d4, 1d6)` — multiple dice roll expressions
+>
+> `d20` — shorthand for `1d20`
+>
+> `d%` — shorthand for `1d100`
+>
+> `dF` — shorthand for `1dF`
+
+But Tyche is more flexible. It's extensible. You can add your own of any of the following:
+
+> These can be added in the dice parser session itself:
+>
+> `$name = 4` — define **variables**
+>
+> `d<'Fuck','Marry','Kill'>` - define **custom dice**
+>
+> And these can be added with plugins written in Python:
+>
+> `XdYM` — dice **modifiers**
+>
+> `name(XdY)` — dice **functions**
+> 
+> `X [SYMBOL] Y` — **arithmetic operators**
