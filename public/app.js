@@ -50,23 +50,6 @@ document.addEventListener('turbolinks:load', function() {
     add_katex_stylesheet();
 });
 
-// const set_favicon = function() {
-//     console.log('(set_favicon)')
-//     // change favicon to favicon-dark-mode.ico when in dark mode
-//     // change favicon to favicon-light-mode.ico when in light mode
-//     const favicon = document.querySelector('link[rel="icon"]');
-
-//     // detect system theme
-//     const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-//     // change favicon based on system theme
-//     if (isDarkMode) {
-//     favicon.href = '/src/assets/favicon-dark-mode.ico';
-//     } else {
-//     favicon.href = '/src/assets/favicon-light-mode.ico';
-//     }
-// }
-
 const katex_stylesheet = '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css" \
 integrity="sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ" crossorigin="anonymous">';
 
@@ -84,7 +67,7 @@ const fix_mailto_links = function() {
     const mailto_links = document.querySelectorAll('a[href^="mailto:"]');
     mailto_links.forEach(function(link) {
             // replace [at] with @, and [dot] with .
-            email = link.href.replace('[at]', '@').replace('[dot]', '.');
+            email = link.href.replace('%5B', '[').replace('%5D', ']').replace('[at]', '@').replace('[dot]', '.');
             link.href = email;
         
         }
