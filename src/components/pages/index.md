@@ -1,11 +1,9 @@
-I am Lukas. or `lumirth`.
+I am [Lukas](/info). or `lumirth`.
 
 I wear a number of hats.
 
 - Student of Computer Science + Philosophy @ [Illinois](https://cs.illinois.edu)
-- Other things, probably.
-
-Check out my [projects](/work). There's more info about me [here](/info).
+- Creator of [projects](/work).
 
 ---
 
