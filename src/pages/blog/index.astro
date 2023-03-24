@@ -1,18 +1,21 @@
 ---
 import { getCollection } from 'astro:content';
 import Card from '../../components/Card.astro';
-import BlogCard from '../../components/BlogCard.astro';
 import Main from '../../components/Main.astro';
 
+// if not visible, don't render
 const posts = (await getCollection('blog')).sort(
 	(b, a) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
-);
+).filter((post) => post.data.visible);
+
+const is_posts = posts.length > 0;
 ---
 
 <meta charset="utf-8" />
 <!DOCTYPE html>
 <html lang="en">
 	<Main page_title="MIRTH.CC/BLOG">
+		{ !is_posts && <h1>Sorry, no posts yet!</h1> }
 		{
 			posts.map((post) => (
 				<Card

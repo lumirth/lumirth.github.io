@@ -15,6 +15,7 @@ const blog = defineCollection({
 			.optional()
 			.transform((str) => (str ? new Date(str) : undefined)),
 		heroImage: z.string().optional(),
+		visible: z.boolean().default(true),
 	}),
 });
 
@@ -35,6 +36,7 @@ const work = defineCollection({
 	  image_alt: z.string().optional(),
 	  tags_icon: z.array(z.string()),
 	  tags_text: z.array(z.string()),
+	  visible: z.boolean().default(true),
 	}),
 });
 
