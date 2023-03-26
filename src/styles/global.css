@@ -35,7 +35,7 @@ main a {
   color: var(--power-text-color);
   text-decoration: underline;
   text-underline-offset: 0.1rem;
-  text-decoration-thickness: 0.075rem;
+  text-decoration-thickness: 0.1rem;
   transition: all 0.2s ease-in-out;
 }
 
@@ -44,8 +44,8 @@ main a {
 @media (min-width: 768px) {
   main a:hover {
     text-decoration: underline;
-    text-decoration-thickness: 0.075rem;
-    text-underline-offset: 0.25rem;
+    text-underline-offset: 0.30rem;
+    text-decoration-thickness: 0.08rem;
     /* text-decoration-color: blue; */
     color: var(--accent-color);
     transition: all 0.2s ease-in-out;
@@ -434,10 +434,14 @@ code {
 /* This doesn't work in the Astro component */
 .card-description a {
   color: var(--faded-text-color);
+  text-decoration-thickness: 0.1rem;
 }
 
 .card-description a:hover {
   color: var(--accent-color);
+  text-underline-offset: 0.30rem;
+  text-decoration-thickness: 0.08rem;
+
 }
 
 .no-posts {

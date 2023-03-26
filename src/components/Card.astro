@@ -157,14 +157,14 @@ const md_description = md.renderInline(description);
   color: var(--power-text-color);
   cursor: pointer;
   text-underline-offset: 0.1rem;
-  text-decoration-thickness: 0.075rem;
+  text-decoration-thickness: 0.1rem;
   transition: all 0.2s ease-in-out;
 }
 
 .card-title-text-link:hover {
   text-decoration: underline;
-  text-decoration-thickness: 0.075rem;
-  text-underline-offset: 0.25rem;
+  text-underline-offset: 0.30rem;
+  text-decoration-thickness: 0.08rem;
   color: var(--accent-color);
   transition: all 0.2s ease-in-out;
 }
@@ -172,10 +172,10 @@ const md_description = md.renderInline(description);
 /* add padding to top of title text on firefox browser */
 @-moz-document url-prefix() {
   .card-title-text {
-    padding-top: 0.1rem;
+    // padding-top: 0.1rem;
   }
   .card-title-text-link {
-    padding-top: 0.1rem;
+    // padding-top: 0.1rem;
   }
 }
 .card-description {
