@@ -156,15 +156,17 @@ const md_description = md.renderInline(description);
   text-transform: uppercase;
   color: var(--power-text-color);
   cursor: pointer;
-  text-underline-offset: 0.1rem;
-  text-decoration-thickness: 0.1rem;
+  text-underline-offset: var(--text-underline-offset-default);
+  text-decoration-thickness: var(--text-decoration-thickness);
   transition: all 0.2s ease-in-out;
 }
 
 .card-title-text-link:hover {
   text-decoration: underline;
-  text-underline-offset: 0.30rem;
-  text-decoration-thickness: 0.08rem;
+  text-underline-offset: calc(
+      var(--text-underline-offset-default) + var(--text-underline-offset-hover-diff)
+    );
+  text-decoration-thickness: var(--text-decoration-thickness);
   color: var(--accent-color);
   transition: all 0.2s ease-in-out;
 }
