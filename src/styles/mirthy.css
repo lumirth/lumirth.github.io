@@ -405,6 +405,10 @@ article {
   margin-top: 24px;
 }
 
+.vert-align-top {
+  vertical-align: top;
+}
+
 .data-footnote-backref {
   color: var(--faded-text-color);
 }

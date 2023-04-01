@@ -145,6 +145,7 @@ function add_style_to_sup_a() {
       supElement.children[0].classList.add("link--glowing");
       supElement.children[0].classList.add("text--undecorated");
     }
+    supElement.classList.add("vert-align-top");
   }
 }
 
