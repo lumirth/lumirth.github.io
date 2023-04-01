@@ -57,6 +57,7 @@ export default defineConfig({
         'code': 'code',
         'hr': 'hori-line',
         'table': 'table',
+        'sup a': 'text--faded',
       }]
     ],
     shikiConfig: {

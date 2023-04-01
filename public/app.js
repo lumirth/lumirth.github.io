@@ -131,6 +131,23 @@ function add_code_inline_to_inline_code_elements() {
   console.log("added code--inline class to code elements");
 }
 
+// when we remove rehype we can get rid of this/replace it with something else
+function add_style_to_sup_a() {
+  console.log("add_style_to_sup_a")
+  const supElements = document.getElementsByTagName("sup");
+  for (const supElement of supElements) {
+    if (supElement.children[0].nodeName == "A") {
+      console.log("supElement.children[0].nodeName == A")
+      for (const className of supElement.children[0].classList) {
+        supElement.children[0].classList.remove(className);
+      }
+      supElement.children[0].classList.add("text--faded");
+      supElement.children[0].classList.add("link--glowing");
+      supElement.children[0].classList.add("text--undecorated");
+    }
+  }
+}
+
 // turbolinks onload do things
 document.addEventListener("turbolinks:load", function () {
   console.log(
@@ -156,6 +173,7 @@ document.addEventListener("turbolinks:load", function () {
     return;
   }
 
+  add_style_to_sup_a();
   add_media_class_to_images_and_videos();
   add_code_block_class_to_pre_elements();
   add_copy_buttons();
