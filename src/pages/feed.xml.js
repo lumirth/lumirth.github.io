@@ -3,9 +3,9 @@ import { getCollection } from "astro:content";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import sanitizeHtml from "sanitize-html";
 import MarkdownIt from "markdown-it";
-import markdownItFootnote from "markdown-it-footnote";
+// import markdownItFootnote from "markdown-it-footnote";
 const parser = new MarkdownIt();
-parser.use(markdownItFootnote);
+// parser.use(markdownItFootnote);
 
 export async function get(context) {
   const posts = await getCollection("blog");
@@ -19,7 +19,7 @@ export async function get(context) {
       pubDate: post.data.pubDate,
       description: post.data.description,
       customData: post.data.customData,
-      content: parser.render(post.body),
+      content: sanitizeHtml(parser.render(post.body)),
       link: `/blog/${post.slug}/`,
     })),
   });
