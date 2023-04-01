@@ -40,6 +40,9 @@ dependencies:
   markdown-it:
     specifier: ^13.0.1
     version: 13.0.1
+  markdown-it-footnote:
+    specifier: ^3.0.3
+    version: 3.0.3
   rehype-add-classes:
     specifier: ^1.0.0
     version: 1.0.0
@@ -2789,6 +2792,10 @@ packages:
   /markdown-extensions@1.1.1:
     resolution: {integrity: sha512-WWC0ZuMzCyDHYCasEGs4IPvLyTGftYwh6wIEOULOF0HXcqZlhwRzrK0w2VUlxWA98xnvb/jszw4ZSkJ6ADpM6Q==}
     engines: {node: '>=0.10.0'}
+    dev: false
+
+  /markdown-it-footnote@3.0.3:
+    resolution: {integrity: sha512-YZMSuCGVZAjzKMn+xqIco9d1cLGxbELHZ9do/TSYVzraooV8ypsppKNmUJ0fVH5ljkCInQAtFpm8Rb3eXSrt5w==}
     dev: false
 
   /markdown-it@13.0.1:

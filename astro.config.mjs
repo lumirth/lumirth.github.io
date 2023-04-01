@@ -20,7 +20,7 @@ const m2dxOptions = {
 };
 
 export default defineConfig({
-  site: "https://example.com",
+  site: "https://mirth.cc",
   integrations: [
     mdx(),
     sitemap(),
