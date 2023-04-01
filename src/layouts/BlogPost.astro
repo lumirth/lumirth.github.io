@@ -13,12 +13,12 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 		<BaseHead title={title} description={description} />
 	</head>
 
-	<body>
+	<body class="page">
 		<Header />
-		<div class="image-banner-container">
-		<img class="image-banner" src={heroImage} alt={`Banner for ${title}`} />
+		<div class="image-banner">
+		<img class="image-banner__image" src={heroImage} alt={`Banner for ${title}`} />
 		</div>
-		<main>
+		<main class="page__content">
 			<Card title={title} date={pubDate} description={description} link_enabled={false} />
 			<article>
 				{

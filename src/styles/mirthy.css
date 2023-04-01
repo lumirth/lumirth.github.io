@@ -1,0 +1,539 @@
+/* 
+███    ███ ██ ██████  ████████ ██   ██ 
+████  ████ ██ ██   ██    ██    ██   ██ 
+██ ████ ██ ██ ██████     ██    ███████ 
+██  ██  ██ ██ ██   ██    ██    ██   ██ 
+██      ██ ██ ██   ██    ██    ██   ██ 
+   Comprehensive stylesheet v0.1.0
+*/
+
+/* commented out because we're using the optimizer in BaseHead.astro */
+/* google inter font */
+/* @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800&display=swap"); */
+/* google fira code font */
+/* @import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@100;200;300;400;500;600;700;800&display=swap"); */
+
+:root {
+  /* themeable colors */
+  --background-color: #fff;
+  --item-background-color: #f8f8f8;
+  --item-background-color-hover: #f0f0f0;
+  --border-color: #e7e7e7;
+  /* text colors */
+  --text-color: #333;
+  --faded-text-color: #666;
+  --power-text-color: #000;
+  /* key non-background color */
+  --accent-color: #49104c;
+
+  /* text underline offset for the moving underline effect */
+  --text-underline-offset-default: 0.15rem;
+  --text-underline-offset-hover-diff: 0.25rem;
+  --text-decoration-thickness: 0.075rem;
+}
+
+/* dark mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* themeable colors */
+    --background-color: #111;
+    --item-background-color: #222;
+    --item-background-color-hover: #333;
+    --border-color: #444;
+    /* text colors */
+    --text-color: #eee;
+    --faded-text-color: #999;
+    --power-text-color: #fff;
+    /* key non-background color */
+    --accent-color: #d983f1;
+  }
+}
+
+.page {
+  /* replaced body */
+  /* set default text color across the page */
+  color: var(--text-color);
+  /* set default background color across the page */
+  background-color: var(--background-color);
+  /* set default font across the page */
+  font-family: "Inter", sans-serif;
+  /* center the body horizontally */
+  margin: 0 auto 3rem;
+  padding: 1rem;
+}
+
+@media screen and (min-width: 768px) {
+  .page {
+    /* replaced body */
+    max-width: 75%;
+  }
+}
+
+.page__content {
+  /* replaced main */
+  line-height: 1.75;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                 code and code blocks, inline and otherwise                 */
+/* -------------------------------------------------------------------------- */
+
+.code {
+  /* replaced code */
+  /* set default font for code blocks */
+  font-family: "Fira Code", monospace;
+}
+
+.code--inline {
+  background-color: var(--item-background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  padding: 0.1rem 0.3rem;
+}
+
+.code--block {
+  /* replaced pre */
+  /* set default background color for code blocks */
+  position: relative;
+  background-color: var(--item-background-color);
+  font-family: "Fira Code", monospace;
+  background-color: var(--item-background-color);
+  border: 1px solid var(--border-color);
+  padding: 1rem;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-size: 11pt;
+}
+
+/* ------------------------------------ x ----------------------------------- */
+/* shiki line numbers */
+/* pre code .line:before {
+    counter-increment: step;
+    content: counter(step);
+    display: inline-block;
+    width: 2em;
+    margin-right: 1em;
+    color: #525053;
+  } */
+
+/* ------------------------------------ x ----------------------------------- */
+
+
+/* -------------------------------------------------------------------------- */
+/*                                   media!                                   */
+/* -------------------------------------------------------------------------- */
+
+.media {
+  /* replaced img, video */
+  /* dynamic image/video sizing */
+  width: 100%;
+  height: auto;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                 text stuff                                 */
+/* -------------------------------------------------------------------------- */
+
+.text--faded {
+  color: var(--faded-text-color);
+}
+
+.text--big-technical {
+    font-family: 'Fira Code', monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-size: 1.5rem;
+    color: var(--faded-text-color);
+  }
+
+/* -------------------------------------------------------------------------- */
+/*                              all sortsa links                              */
+/* -------------------------------------------------------------------------- */
+
+.link {
+  /* replaced a */
+  color: var(--power-text-color);
+  text-decoration: underline;
+}
+
+.link--gasping {
+  /* replaced a */
+  /* link style where instead of colored links, links are underlined and the underline floats downwards when hovered */
+  text-underline-offset: var(--text-underline-offset-default);
+  text-decoration-thickness: var(--text-decoration-thickness);
+  transition: all 0.2s ease-in-out;
+}
+
+@media screen and (min-width: 768px) {
+  .link--gasping:hover {
+    /* replaced main a:hover */
+    /* link style where instead of colored links, links are underlined and the underline floats downwards when hovered */
+    text-underline-offset: calc(
+      var(--text-underline-offset-default) +
+        var(--text-underline-offset-hover-diff)
+    );
+    text-decoration-thickness: var(--text-decoration-thickness);
+    color: var(--accent-color);
+    transition: all 0.2s ease-in-out;
+  }
+}
+
+.link--monospace {
+  /* replaced a */
+  /* link style where instead of colored links, links are underlined and the underline floats downwards when hovered */
+  font-family: "Fira Code", monospace;
+  text-decoration: none;
+}
+
+.link--glowing:hover {
+  color: var(--accent-color);
+  transition: all 0.2s ease-in-out;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                 blockquotes                                */
+/* -------------------------------------------------------------------------- */
+
+.blockquote {
+  /* replaced blockquote */
+  /* block quote styling */
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+  border-left: 3px solid var(--border-color);
+  background-color: var(--item-background-color);
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 20px;
+  color: var(--text-color);
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+@media (min-width: 768px) {
+  .blockquote {
+    /* replaced blockquote */
+    font-size: 0.9rem;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                              horizontal lines                              */
+/* -------------------------------------------------------------------------- */
+
+.hori-line {
+  /* replaced hr */
+  /* horizontal line styling */
+  border: 0;
+  border-top: 1px solid var(--border-color);
+  margin: 1rem 0;
+}
+
+.hori-line--with-margin {
+  /* replaced hr */
+  /* horizontal line styling */
+  border: 0;
+  border-top: 1px solid var(--border-color);
+  margin: 2rem 0;
+}
+
+/* -------------------------------------------------------------------------- */
+/*             table styles. might need to tinker with these more             */
+/* -------------------------------------------------------------------------- */
+
+/* mobile-first table styles */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.table th,
+.table td {
+  padding: 0.5rem;
+  text-align: left;
+  border: 1px solid var(--border-color);
+  background-color: var(--item-background-color);
+}
+
+.table thead th {
+  font-weight: 400;
+  background-color: var(--background-color);
+}
+
+.table tbody tr:hover {
+  background-color: var(--item-background-color-hover);
+}
+
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* desktop table styles */
+@media screen and (min-width: 768px) {
+  .table {
+    font-size: 0.85rem;
+  }
+
+  .table th,
+  .table td {
+    padding: 0.75rem;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                aside styles                                */
+/* -------------------------------------------------------------------------- */
+
+.aside {
+  /* replaced aside */
+  /* aside styling */
+  display: inline-block;
+  width: auto;
+  margin: 0;
+  padding: 0.75rem 0.75rem 0.5rem 0.75rem;
+  list-style-type: none;
+  background-color: var(--item-background-color);
+  /* padding: 1rem; */
+  border: 1px solid var(--border-color);
+}
+
+.aside--left p,
+.aside--right p {
+  margin: 0;
+  padding: 0;
+}
+
+/* desktop aside styling */
+@media screen and (min-width: 769px) {
+  .aside--left {
+    float: left;
+    margin-top: 1.5rem;
+    margin-right: 1.5rem;
+    margin-bottom: 1.5rem;
+    width: 30%;
+    background-color: var(--item-background-color);
+    border: 1px solid var(--border-color);
+  }
+
+  .aside--right {
+    float: right;
+    margin-top: 1.5rem;
+    margin-left: 1.5rem;
+    margin-bottom: 1.5rem;
+    width: 30%;
+    background-color: var(--item-background-color);
+    border: 1px solid var(--border-color);
+  }
+
+  .aside--left img,
+  .aside--right img {
+    width: 100%;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                   icons?                                   */
+/* -------------------------------------------------------------------------- */
+
+/* work card styling */
+.astro-icon {
+  width: 12px;
+  height: 12px;
+  margin-bottom: -2px;
+  background: url("https://api.iconify.design/simple-icons/astro.svg") no-repeat
+    center center / contain;
+  content: url("https://api.iconify.design/simple-icons/astro.svg");
+  filter: invert(0%) sepia(5%) saturate(144%) hue-rotate(317deg) brightness(87%)
+    contrast(87%);
+}
+
+@media (prefers-color-scheme: dark) {
+  .astro-icon {
+    filter: invert(88%) sepia(100%) saturate(138%) hue-rotate(197deg)
+      brightness(107%) contrast(101%);
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                image banner                                */
+/* -------------------------------------------------------------------------- */
+
+.image-banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto 0.5rem 1rem;
+}
+
+.image-banner__image {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  max-width: 600px;
+  max-height: 200px;
+  overflow: hidden;
+  object-fit: cover;
+  width: 100%;
+  padding: 10px;
+  background-color: var(--item-background-color);
+  border: 1px solid var(--border-color);
+  position: relative;
+}
+
+/* -------------------------------------------------------------------------- */
+/*          these probably need to be reworked and killed off somehow         */
+/* -------------------------------------------------------------------------- */
+
+/* Work banner styling */
+article {
+  margin-top: 24px;
+}
+
+sup a,
+.data-footnote-backref {
+  color: var(--faded-text-color);
+  text-decoration: none;
+}
+
+.data-footnote-backref:hover {
+  color: var(--accent-color);
+}
+
+.last-updated-on {
+  display: flex;
+  justify-content: center;
+  padding-top: 0.75rem;
+  font-size: 0.8rem;
+  color: var(--faded-text-color);
+}
+
+/* -------------------------------------------------------------------------- */
+/*                               button styling                               */
+/* -------------------------------------------------------------------------- */
+
+.button {
+  position: relative;
+  box-sizing: border-box;
+
+  background-color: var(--item-background-color);
+  border: none;
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+
+  margin: 0;
+  padding: 0 0.5rem;
+  height: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+
+  font-size: 1.2rem;
+  font-family: "Inter", sans-serif;
+  font-weight: 300;
+  text-transform: uppercase;
+
+  transition: all 0.1s ease-in-out;
+}
+
+@media (min-width: 769px) {
+  .button {
+    height: 2rem;
+    font-size: 1rem;
+  }
+}
+
+.button--dont-wrap {
+  flex-shrink: 0;
+}
+
+.button--top-right {
+  position: absolute !important;
+  top: 0;
+  right: 0;
+}
+
+.button--top-right-with-margins {
+  position: absolute !important;
+  top: 0.2rem;
+  right: 0.2rem;
+}
+
+.button--mini {
+  height: 1.5rem;
+  font-size: 0.8rem;
+}
+
+.button:hover {
+  background-color: var(--border-color);
+}
+
+.button:active {
+  border: 1px solid var(--item-background-color);
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                input styling                               */
+/* -------------------------------------------------------------------------- */
+
+.input-text-line {
+  position: relative;
+  box-sizing: border-box;
+  outline: 0;
+  border: 0;
+  margin: 0;
+  padding: 0 0.5rem;
+
+  border: 1px solid var(--border-color);
+  background-color: var(--item-background-color);
+
+  height: 2.5rem;
+  max-height: 2.5rem;
+
+  color: var(--text-color);
+  font-size: 1.2rem;
+  font-family: "Inter", sans-serif;
+  font-weight: 300;
+  transition: all 0.1s ease-in-out;
+}
+
+@media (min-width: 769px) {
+  .input-text-line {
+    height: 2rem;
+    font-size: 1rem;
+  }
+}
+
+.input-text-line::placeholder {
+  color: var(--faded-text-color);
+  text-transform: uppercase;
+  opacity: 0.3;
+}
+
+.input-text-line:focus::placeholder {
+  color: transparent;
+  transition: all 0.1s ease-in-out;
+}
+
+.input-text-line:focus {
+  border: 1px solid var(--accent-color);
+  transition: all 0.1s ease-in-out;
+}
+
+.input-and-buttons-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}

@@ -12,9 +12,9 @@ const { page_title } = Astro.props;
 	<BaseHead title={page_title} description={SITE_DESCRIPTION} />
 	<!-- <script is:inline src="/app.js"></script> -->
 </head>
-<body>
+<body class="page">
 	<Header/>
-	<main>
+	<main class="page__content">
 		<slot />
 	</main>
 	<Footer />

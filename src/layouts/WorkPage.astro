@@ -13,12 +13,12 @@ const { title, description, pubDate, updatedDate, banner_source, image_source, i
 		<BaseHead title={title} description={description} />
 	</head>
 
-	<body>
+	<body class="page">
 		<Header />
-        <div class="image-banner-container">
-        <img class="image-banner" src={banner_source} alt={`Banner for ${title}`} />
+        <div class="image-banner">
+        <img class="image-banner__image" src={banner_source} alt={`Banner for ${title}`} />
 		</div>
-        <main>
+        <main class="page__content">
             <Card 
                 title={title}
                 href="#"

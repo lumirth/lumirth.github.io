@@ -8,17 +8,17 @@ const today = new Date();
 <footer>
   <div class="links">
     <!-- github -->
-    <a href="https://www.github.com/lumirth" target="_blank" rel="noopener noreferrer">
+    <a class="link link--monospace link--glowing" href="https://www.github.com/lumirth" target="_blank" rel="noopener noreferrer">
       GITHB
     </a>
     <!-- linkedin -->
     •
-    <a href="https://www.linkedin.com/in/lumirth" target="_blank" rel="noopener noreferrer">
+    <a class="link link--monospace link--glowing" href="https://www.linkedin.com/in/lumirth" target="_blank" rel="noopener noreferrer">
       LKDIN
     </a>
     •
     <!-- email -->
-    <a href="mailto:lu[at]mirth[dot]cc" target="_blank" rel="noopener noreferrer">
+    <a class="link link--monospace link--glowing" href="mailto:lu[at]mirth[dot]cc" target="_blank" rel="noopener noreferrer">
     EMAIL
   </a>
 </div>
@@ -45,22 +45,6 @@ footer {
     justify-content: unset;
     margin-top: 1.3rem;
     margin-bottom: 4rem;
-  }
-}
-
-/* link style where instead of colored links, links are underlined and the underline floats downwards when hovered */
-a {
-  color: var(--power-text-color);
-  text-decoration: none;
-  transition: all 0.2s ease-in-out;
-}
-
-/* make body 60% on desktop */
-/* link style where instead of colored links, links are underlined and the underline floats downwards when hovered */
-@media (min-width: 768px) {
-  a:hover {
-    color: var(--accent-color);
-    transition: all 0.2s ease-in-out;
   }
 }
 
