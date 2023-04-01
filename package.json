@@ -12,7 +12,7 @@
   "dependencies": {
     "@astrojs/image": "^0.16.1",
     "@astrojs/mdx": "^0.17.2",
-    "@astrojs/rss": "^2.1.1",
+    "@astrojs/rss": "^2.3.0",
     "@astrojs/sitemap": "^1.1.0",
     "@astrojs/turbolinks": "^0.2.1",
     "astro": "^2.1.6",
@@ -28,6 +28,7 @@
     "remark-directive": "^2.0.1",
     "remark-math": "^5.1.1",
     "rollup": "^3.19.1",
+    "sanitize-html": "^2.10.0",
     "sharp": "^0.31.3",
     "shiki": "^0.14.1"
   },
