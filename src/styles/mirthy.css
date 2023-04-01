@@ -84,6 +84,7 @@
   /* replaced code */
   /* set default font for code blocks */
   font-family: "Fira Code", monospace;
+  word-break: break-word;
 }
 
 .code--inline {
