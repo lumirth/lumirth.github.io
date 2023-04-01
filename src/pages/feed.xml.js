@@ -13,14 +13,13 @@ export async function get(context) {
   return rss({
     title: "MIRTH.CC",
     description: "Lumirth's beloved garbage agglomerate",
-	link: "https://mirth.cc",
     site: context.site,
     items: blog.map((post) => ({
       title: post.data.title,
       pubDate: post.data.pubDate,
       description: post.data.description,
       customData: post.data.customData,
-      content: sanitizeHtml(parser.render(post.body)),
+      content: parser.render(post.body),
       link: `/blog/${post.slug}/`,
     })),
   });
