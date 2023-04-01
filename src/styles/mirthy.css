@@ -24,7 +24,7 @@
   --faded-text-color: #666;
   --power-text-color: #000;
   /* key non-background color */
-  --accent-color: #49104c;
+  --accent-color: #ff0000;
 
   /* text underline offset for the moving underline effect */
   --text-underline-offset-default: 0.15rem;
@@ -45,7 +45,7 @@
     --faded-text-color: #999;
     --power-text-color: #fff;
     /* key non-background color */
-    --accent-color: #d983f1;
+    --accent-color: #ff6600;
   }
 }
 
