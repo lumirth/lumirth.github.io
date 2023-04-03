@@ -3,24 +3,23 @@ import HeaderLink from "./HeaderLink.astro";
 import { SITE_TITLE } from "../consts";
 ---
 
-<header class="mirth-header">
-  <a class="titlelink" href="/">
+<header class="header">
+  <a class="header__title-link" href="/">
     [{SITE_TITLE}]
   </a>
-  <div class="navbar">
-    <nav>
-      <ul>
+  <div class="header__navbar">
+    <nav class="nav">
+      <ul class="nav__list">
         <!-- <li><HeaderLink href="/">HOME</HeaderLink></li> -->
-        <li><HeaderLink href="/blog">BLOG</HeaderLink></li>
-        <li><HeaderLink href="/work">WORK</HeaderLink></li>
-        <li><HeaderLink href="/info">INFO</HeaderLink></li>
+        <li class="nav__list-item"><HeaderLink class="nav__link" href="/blog">BLOG</HeaderLink></li>
+        <li class="nav__list-item"><HeaderLink class="nav__link" href="/work">WORK</HeaderLink></li>
+        <li class="nav__list-item"><HeaderLink class="nav__link" href="/info">INFO</HeaderLink></li>
       </ul>
     </nav>
   </div>
 </header>
 <style>
-  /* nav styling */
-  .titlelink {
+  .header__title-link {
     text-decoration: none;
     color: inherit;
     font-size: x-large;
@@ -32,11 +31,11 @@ import { SITE_TITLE } from "../consts";
     margin-right: auto;
   }
 
-  .navbar-spacer {
+  .header__navbar-spacer {
     width: 0.75rem;
   }
 
-  nav {
+  .nav {
     z-index: 1;
     position: fixed;
     bottom: 0;
@@ -46,7 +45,7 @@ import { SITE_TITLE } from "../consts";
     border-top: 1px solid var(--border-color);
   }
 
-  nav ul {
+  .nav__list {
     display: flex;
     justify-content: space-between;
     padding: 0;
@@ -54,13 +53,13 @@ import { SITE_TITLE } from "../consts";
     list-style: none;
   }
 
-  nav li {
+  .nav__list-item {
     padding: 0.75rem 0;
     flex: 1;
     text-align: center;
   }
 
-  nav a {
+  .nav__link {
     display: block;
     color: var(--faded-text-color);
     text-decoration: none;
@@ -69,32 +68,29 @@ import { SITE_TITLE } from "../consts";
 
   /* THIS SUCKS — but because firefox cant handle its shit, we have to do this so the navbar is bearable on firefox */
   @-moz-document url-prefix() {
-    nav a.active {
+    .nav__link.active {
       pointer-events: none;
     }
   }
 
-  nav a.active {
+  .nav__link.active {
     color: var(--power-text-color);
     font-weight: bold;
     position: relative;
     cursor: pointer !important;
   }
 
-  nav a.active::before {
+  .nav__link.active::before {
     content: "[";
     position: relative;
-    /* top: -0.068rem; */
   }
 
-  nav a.active::after {
+  .nav__link.active::after {
     content: "]";
     position: relative;
-    /* top: -0.068rem; */
   }
 
-  .mirth-header {
-    /* align items with one to the left and one to the right */
+  .header {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -104,58 +100,48 @@ import { SITE_TITLE } from "../consts";
     margin-top: 1rem;
   }
 
-
-  nav {
+  .nav {
     padding-bottom: 0.75rem;
   }
 
   @media all and (display-mode: standalone) {
-    nav {
+    .nav {
       padding-bottom: 1.5rem;
     }
   }
-  /* for desktop, make the nav bar on the top */
-  /* in its normal position */
-  /* right-aligned with the title */
+
   @media screen and (min-width: 768px) {
-    /* right align the nav */
-    /* make spacing between buttons constant */
-    .titlelink {
+    .header__title-link {
       margin: 0;
     }
 
-    nav {
+    .nav {
       all: unset;
       position: relative;
       display: flex;
       justify-content: flex-end;
       background-color: transparent;
       border-top: none;
-      /* fix the spacing under the nav so it doesn't jump when scaling */
       padding-bottom: 1.5rem;
     }
 
-    /* fix the nav bar width */
-    nav ul {
+    .nav__list {
       width: 15rem;
     }
 
-    nav li {
+    .nav__list-item {
       margin-top: 0.2rem;
       padding: 0;
     }
 
-    .mirth-header {
-      /* margin-top:1.9rem; */
+    .header {
       margin-top: 4rem;
-      /* align items with one to the left and one to the right */
       width: 100%;
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
       margin-bottom: 3rem;
-      /* align to center */
     }
   }
 </style>
