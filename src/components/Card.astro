@@ -179,7 +179,6 @@ const md_description = md.renderInline(description);
     gap: 0.3rem;
   }
   .card-title-text {
-    line-height: 1;
     margin: 0;
     padding: 0;
     font-size: 14px;
@@ -188,7 +187,7 @@ const md_description = md.renderInline(description);
     color: var(--power-text-color);
     transition: all 0.2s ease-in-out;
     position: relative;
-    bottom: -0.05rem;
+    bottom: 0.04rem;
   }
 
   .card-date {
@@ -201,7 +200,7 @@ const md_description = md.renderInline(description);
   }
 
   .card-title-text-link {
-    line-height: 1;
+    line-height: inherit;
     margin: 0;
     padding: 0;
     font-size: 14px;
@@ -213,7 +212,10 @@ const md_description = md.renderInline(description);
     text-underline-offset: var(--text-underline-offset-default);
     text-decoration-thickness: var(--text-decoration-thickness);
     transition: all 0.2s ease-in-out;
+    position: relative;
+    bottom: 0.08rem;
   }
+
 
   /* link style where instead of colored links, links are underlined and the underline floats downwards when hovered */
   main a {
