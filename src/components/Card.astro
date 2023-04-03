@@ -250,7 +250,7 @@ const md_description = md.renderInline(description);
     max-width: 90px;
   }
 
-  .card-tags-list {
+  .card-tags-list {    
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -262,6 +262,13 @@ const md_description = md.renderInline(description);
   }
 
   .card-tags li {
+    font-family: 'Fira Code', monospace;
+    height: 1rem;
+    color: var(--power-text-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
     flex-shrink: 0;
     font-size: 12px;
     background-color: (--item-background-color);
