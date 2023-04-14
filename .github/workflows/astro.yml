@@ -87,23 +87,25 @@ jobs:
           import os
           from PIL import Image
 
-          folder_path = '${{ env.BUILD_PATH }}/dist'
+          folder_path = 'dist'
           quality = 90
           max_width = 600
 
-          for filename in os.listdir(folder_path):
-              if filename.endswith('.jpg') or filename.endswith('.jpeg') or filename.endswith('.png'):
-                  image_path = os.path.join(folder_path, filename)
-                  img = Image.open(image_path)
-                  old_size = os.stat(image_path).st_size
+          for root, dirs, files in os.walk(folder_path):
+              for filename in files:
+                  if filename.endswith('.jpg') or filename.endswith('.jpeg') or filename.endswith('.png'):
+                      image_path = os.path.join(root, filename)
+                      img = Image.open(image_path)
+                      old_size = os.stat(image_path).st_size
 
-                  if img.width > max_width:
-                      ratio = max_width / img.width
-                      new_height = int(img.height * ratio)
-                      img = img.resize((max_width, new_height))
+                      if img.width > max_width:
+                          ratio = max_width / img.width
+                          new_height = int(img.height * ratio)
+                          img = img.resize((max_width, new_height))
 
-                  img.save(image_path, optimize=True, quality=quality)
-                  new_size = os.stat(image_path).st_size
+                      img.save(image_path, optimize=True, quality=quality)
+                      new_size = os.stat(image_path).st_size
+                      print(f'File {filename} processed. Old size: {old_size}, New size: {new_size}')
           "
       # REPLACE THE ABOVE WITH CACHING/INSTALLING AND USING PILLOW
       - name: Upload artifact
