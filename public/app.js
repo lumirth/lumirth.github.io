@@ -54,6 +54,19 @@ const fix_mailto_links = function () {
   });
 };
 
+const katex_stylesheet =
+  '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css" \
+integrity="sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ" crossorigin="anonymous">';
+
+// if the page contains an element with the class "katex", add the katex stylesheet
+const add_katex_stylesheet = function () {
+  console.log("(add_katex_stylesheet) Adding katex stylesheet if needed.");
+  const katex_elements = document.querySelectorAll(".katex");
+  if (katex_elements.length > 0) {
+    document.head.insertAdjacentHTML("beforeend", katex_stylesheet);
+  }
+};
+
 const apply_theme_colors_dynamically = function () {
   console.log(
     "(apply_theme_colors_dynamically) Applying theme colors dynamically."
@@ -100,6 +113,7 @@ document.addEventListener("turbolinks:load", function () {
   
   add_copy_buttons();
   add_copy_button_listeners();
+  add_katex_stylesheet();
 });
 
 // event listener for change system theme
