@@ -24,13 +24,26 @@ The below demo can handle a thoroughly restricted subset of the Tyche syntax. It
 - Try rolling: `d20` 
 - Do some basic arithmetic: `3d10 + 4`
 - Maybe some arithmetic that doesn't really make sense for dice: `(4d8 ** (1d4)) / 2`
-- Or maybe get a little crazy and roll: `(d10)d(4d6)`
+- Or maybe get a little crazy and nest: `(d10)d(4d6)`
 - Get even wackier and nest the nesting: `((d10)d(4d6))d(1d20+(d10*3)d8)`
 
 Then hit `evaluate` and watch the dice roller give you a detailed breakdown of the roll.
 
 <TychePrecursorDemo client:load />
 
+---
+
+# Table of Contents
+
+- [Huh?](#huh) - An introduction
+- [Why?](#why) - The problems it solves and why
+- [What?](#what) - The specification itself
+  - [Pieces](#pieces) - The basic building blocks of the syntax
+  - [In practice](#in-practice) - Examples and usage
+- ~~How? - The parser implementation.~~ \<\-\- Coming soon!
+
+
+# Huh?
 
 It's pronounced "[tishe](https://www.google.com/search?q=tyche+pronunciation)"(try saying "ties" with a lisp), like after the Greek goddess of fortune.
 
@@ -71,11 +84,45 @@ This, my friends, is where Tyche comes in. The Tyche Notation: one standard nota
 
 Above all, Tyche follows a number of patterns:
 
-- **Familiar** - Tyche takes inspiration from the dice notation you're already familiar with. If you've ever played a tabletop roleplaying game, you're already mostly familiar. We've just added some things to supercharge the complicated parts and make them easier to understand.
-- **Flexible** - A key component of Tyche is extensibility. If your implementation of Tyche isn't extensible, it's not Tyche. There's a basic subset of intended features inspired by Sophie's Dice, but everything past that is up to you. Want to add your own functions, manipulators, and transformations? Simply write some Python and plug it in—that's the standard Tyche sets up. 
+- **Familiar** - Tyche takes inspiration from the dice notation you're already familiar with. If you've ever played a tabletop roleplaying game, you're already mostly familiar. We've just added some things to supercharge the complicated parts and make them easier to understand. We've also made it more consistent and reliable. Want to roll a dice and use the result as the amount of sides another die has? Tyche makes it easy.
+- **Flexible** - A key component of Tyche is extensibility. If your implementation of Tyche isn't extensible, it's not Tyche. There's a basic subset of intended features inspired by [Sophie's Dice](https://sophiehoulden.com/dice/documentation/notation.html), but everything past that is up to you. Want to add your own functions, manipulators, and transformations? Simply write some Python and plug it in—that's the standard Tyche sets up. 
 - **Feature-filled** - Tyche is designed to cover all the bases. Strings and integers. Arithmetic and functions. Dice and manipulation of them. As best as we can, we've tried to make Tyche the most comprehensive standard possible.
 
 Please also note that *Tyche is unimplemented*. This is a specification that defines the rules an implementation should follow. It, by consequence, defines the usage of the notation. At time of writing, an implementation is currently being written in the Rust programming language. A working  implementation of a subset of Tyche's features(infinitely nestable dice rolls and arithmetic) is available at the top of this page. Or, if you're reading this standard on the Github repo for this project, at [mirth.cc/work/tyche](https://mirth.cc/work/tyche).
+
+## Pieces
+
+The atomic components of Tyche are as follows:
+
+ - **Dice** - A dice roll. `XdY`, where `X` is the number of dice to roll, and `Y` is the number of sides on each die. 
+   - **Manipulators** - Dice may also have manipulators, which present in the form `XdYmZ` or `XdYm{arg1, arg2, arg3, ...}`. `m` is the manipulator's identifier, and `Z` or `{arg1, arg2, arg3, ...}` are the arguments to the manipulator. 
+ - **Numbers** - A decimal number, with no real limit on the number of digits or presence of a decimal point.
+ - **Strings** - A string of characters, enclosed in either single or double quotes.
+ - **Functions** - A function call. `function_name(arg1, arg2, arg3, ...)`, where `function_name` is the name of the function, and `arg1`, `arg2`, `arg3`, etc. are the arguments to the function.
+ 
+ The above can stand alone or be combined with **arithmetic operators—**`+`, `-`, `*`, `/`, `^`, `(`, and `)`—to form expressions. Expressions can be nested infinitely. Expressions can also be acted on by "**Transformers**", which take the form `expression.T(arg1, arg2, arg3, ...)`, where `expression` is the expression to be transformed, `T` is the transformer's identifier, and `arg1`, `arg2`, `arg3`, etc. are the arguments to the transformer.
+
+ ## In practice
+
+Below are some basic examples of Tyche expressions. 
+
+ > `2d6 + 4 - 1` — arithmetic with dice
+>
+> `4d10 / 2 * 3` — division and multiplication
+>
+> `3d6 + (d4 / 2)` — parentheses for order of operations
+>
+> `2d6, 4d8` — multiple dice rolls
+>
+> `d4, 2d6 + 3, (d20/3) + (1d4, 1d6)` — multiple dice roll expressions
+>
+> `d20` — shorthand for `1d20`
+>
+> `d%` — shorthand for `1d100`
+>
+> `dF` — shorthand for `1dF`
+
+Expressions can be combined in Tyche in the form of a "**Tychain**", a comma-separated list of expressions. A Tychain is the top-level unit that a Tyche parser works with. You give it a list of expressions, and it rolls them and returns the result.
 
 # ARCHIVE
 
