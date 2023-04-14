@@ -1,5 +1,9 @@
 console.log("(app.js)");
 
+const COPY_BUTTON_CLASSES = ['button', 'button--mini', 'button--top-right-with-margins'];
+const COPY_BUTTON_INNER_HTML_DEFAULT = "<span>COPY</span>";
+const COPY_BUTTON_INNER_HTML_COPIED = "<span>COPIED</span>";
+
 const add_copy_buttons = function () {
   console.log("(add_buttons) Adding copy buttons for code blocks.");
   const codeBlocks = document.querySelectorAll("pre code");
@@ -8,7 +12,7 @@ const add_copy_buttons = function () {
     button.classList.add("button");
     button.classList.add("button--mini");
     button.classList.add("button--top-right-with-margins");
-    button.innerHTML = "<span>COPY</span>";
+    button.innerHTML = COPY_BUTTON_INNER_HTML_DEFAULT;
     block.parentNode.appendChild(button);
   });
 };
@@ -16,7 +20,7 @@ const add_copy_buttons = function () {
 const add_copy_button_listeners = function () {
   console.log("(copy_code) Add copy event listener for code blocks.");
   const copyButtons = document.querySelectorAll(
-    ".button--top-right-with-margins"
+    COPY_BUTTON_CLASSES[-1]
   );
   copyButtons.forEach(function (button) {
     button.addEventListener("click", function () {
@@ -27,25 +31,12 @@ const add_copy_button_listeners = function () {
       window.getSelection().addRange(range);
       navigator.clipboard.writeText(code.innerText);
       window.getSelection().removeAllRanges();
-      button.innerHTML = "<span>COPIED</span>";
+      button.innerHTML = COPY_BUTTON_INNER_HTML_COPIED;
       setTimeout(function () {
-        button.innerHTML = "<span>COPY</span>";
+        button.innerHTML = COPY_BUTTON_INNER_HTML_DEFAULT;
       }, 2000);
     });
   });
-};
-
-const katex_stylesheet =
-  '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css" \
-integrity="sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ" crossorigin="anonymous">';
-
-// if the page contains an element with the class "katex", add the katex stylesheet
-const add_katex_stylesheet = function () {
-  console.log("(add_katex_stylesheet) Adding katex stylesheet if needed.");
-  const katex_elements = document.querySelectorAll(".katex");
-  if (katex_elements.length > 0) {
-    document.head.insertAdjacentHTML("beforeend", katex_stylesheet);
-  }
 };
 
 const fix_mailto_links = function () {
@@ -91,64 +82,6 @@ const apply_theme_colors_dynamically = function () {
   }
 };
 
-function add_media_class_to_images_and_videos() {
-  const images = document.getElementsByTagName("img");
-  const videos = document.getElementsByTagName("video");
-
-  for (const image of images) {
-    image.classList.add("media");
-  }
-  for (const video of videos) {
-    video.classList.add("media");
-  }
-  console.log("added media class to images and videos");
-}
-
-function add_code_block_class_to_pre_elements() {
-  const preElements = document.getElementsByTagName("pre");
-  for (const preElement of preElements) {
-    preElement.classList.add("code--block");
-  }
-  console.log("added code--block class to pre elements");
-}
-
-function add_hori_line_class_to_hr_elements() {
-  const hrElements = document.getElementsByTagName("hr");
-  for (const hrElement of hrElements) {
-    hrElement.classList.add("hori-line--with-margin");
-  }
-  console.log("added hori-line class to hr elements");
-}
-
-function add_code_inline_to_inline_code_elements() {
-  const codeElements = document.getElementsByTagName("code");
-  for (const codeElement of codeElements) {
-    // if inside a paragraph, add the inline class
-    if (codeElement.parentNode.nodeName == "P") {
-        codeElement.classList.add("code--inline");
-    }
-  }
-  console.log("added code--inline class to code elements");
-}
-
-// when we remove rehype we can get rid of this/replace it with something else
-function add_style_to_sup_a() {
-  console.log("add_style_to_sup_a")
-  const supElements = document.getElementsByTagName("sup");
-  for (const supElement of supElements) {
-    if (supElement.children[0].nodeName == "A") {
-      console.log("supElement.children[0].nodeName == A")
-      for (const className of supElement.children[0].classList) {
-        supElement.children[0].classList.remove(className);
-      }
-      supElement.children[0].classList.add("text--faded");
-      supElement.children[0].classList.add("link--glowing");
-      supElement.children[0].classList.add("text--undecorated");
-    }
-    supElement.classList.add("vert-align-top");
-  }
-}
-
 // turbolinks onload do things
 document.addEventListener("turbolinks:load", function () {
   console.log(
@@ -157,15 +90,8 @@ document.addEventListener("turbolinks:load", function () {
   );
   console.log("(turbolinks:load)");
 
-  add_hori_line_class_to_hr_elements();
-  add_code_inline_to_inline_code_elements();
   apply_theme_colors_dynamically();
   fix_mailto_links();
-  console.log(
-    "%cNOTE: Astro + Github Pages fuckery is getting rid of the lang attribute on the html element. We are setting it in JS as a workaround.",
-    "color: yellow;"
-  );
-  document.documentElement.lang = "en";
   if (
     !window.location.pathname.includes("/blog/") &&
     !window.location.pathname.includes("/work/")
@@ -173,13 +99,9 @@ document.addEventListener("turbolinks:load", function () {
     console.log("(turbolinks:load) Not on blog or work page. Returning.");
     return;
   }
-
-  add_style_to_sup_a();
-  add_media_class_to_images_and_videos();
-  add_code_block_class_to_pre_elements();
+  
   add_copy_buttons();
   add_copy_button_listeners();
-  add_katex_stylesheet();
 });
 
 // event listener for change system theme
@@ -187,4 +109,4 @@ window
   .matchMedia("(prefers-color-scheme: dark)")
   .addEventListener("change", function (e) {
     apply_theme_colors_dynamically();
-  });
+});

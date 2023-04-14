@@ -5,13 +5,16 @@ import sitemap from "@astrojs/sitemap";
 import remarkMath from "remark-math";
 import remarkDirective from "remark-directive";
 import rehypeKatex from "rehype-katex";
-import addClasses from 'rehype-add-classes';
 import turbolinks from "@astrojs/turbolinks"; // will be deprecated eventually
 import image from "@astrojs/image";
 import webmanifest from "astro-webmanifest";
 // import compress from "astro-compress";
-
 import customTheme from './monokai.json';
+import remarkCustomMedia from "./remark-rehype-plugins/remarkCustomMedia"; // Import the custom plugin
+import rehypeStyleFixes from "./remark-rehype-plugins/rehypeStyleFixes";
+import rehypeAddKatexStylesheet from "./remark-rehype-plugins/rehypeAddKatexStylesheet";
+import rehypeLangElement from "./remark-rehype-plugins/rehypeLangElement";
+
 
 
 /** @type {import('astro-m2dx').Options} */
@@ -45,20 +48,16 @@ export default defineConfig({
     remarkPlugins: [
       remarkMath,
       remarkDirective,
-      [m2dx, m2dxOptions]
+      [m2dx, m2dxOptions],
+      remarkCustomMedia
     ],
     rehypePlugins: [
       [rehypeKatex, {
         // Katex plugin options
       }],
-      [addClasses, {
-        'a': 'link link--gasping',
-        'blockquote': 'blockquote',
-        'code': 'code',
-        'hr': 'hori-line',
-        'table': 'table',
-        'sup a': 'text--faded',
-      }]
+      rehypeStyleFixes,
+      rehypeAddKatexStylesheet,
+      rehypeLangElement
     ],
     shikiConfig: {
       theme: customTheme,

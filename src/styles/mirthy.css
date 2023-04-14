@@ -410,6 +410,7 @@ article {
 }
 
 .data-footnote-backref {
+  text-decoration: none;
   color: var(--faded-text-color);
 }
 
