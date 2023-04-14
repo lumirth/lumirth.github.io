@@ -1,6 +1,6 @@
 console.log("(app.js)");
 
-const COPY_BUTTON_CLASSES = ['button', 'button--mini', 'button--top-right-with-margins'];
+const LISTEN_FOR_CLASS = ".button--top-right-with-margins";
 const COPY_BUTTON_INNER_HTML_DEFAULT = "<span>COPY</span>";
 const COPY_BUTTON_INNER_HTML_COPIED = "<span>COPIED</span>";
 
@@ -19,9 +19,7 @@ const add_copy_buttons = function () {
 
 const add_copy_button_listeners = function () {
   console.log("(copy_code) Add copy event listener for code blocks.");
-  const copyButtons = document.querySelectorAll(
-    COPY_BUTTON_CLASSES[-1]
-  );
+  const copyButtons = document.querySelectorAll(LISTEN_FOR_CLASS);
   copyButtons.forEach(function (button) {
     button.addEventListener("click", function () {
       const code = button.parentNode.querySelector("code");
