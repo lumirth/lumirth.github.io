@@ -89,7 +89,7 @@ jobs:
 
           folder_path = 'dist'
           quality = 90
-          max_width = 600
+          max_width = 850
 
           for root, dirs, files in os.walk(folder_path):
               for filename in files:
