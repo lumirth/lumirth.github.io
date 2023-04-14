@@ -51,6 +51,10 @@ function rehypeStyleFixes(options = {}) {
                 // Add the "table" class to the <table> element
                 node.properties.className = (node.properties.className || []).concat('table');
             }
+            if (node.tagName === 'blockquote') {
+                // Add the "blockquote" class to the <blockquote> element
+                node.properties.className = (node.properties.className || []).concat('blockquote');
+            }
         }
     };
 }
