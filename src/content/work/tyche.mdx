@@ -19,7 +19,7 @@ visible: true
 
 import TychePrecursorDemo from "../../components/tyche/TychePrecursorDemo.svelte";
 
-The below demo can handle a thoroughly restricted subset of the Tyche syntax. It can handle basic arithmetic(`+, -, *, /, **`) and dice rolls—but **limitlessly nested**.
+The below demo can handle a simple subset of the Tyche syntax. It can handle basic arithmetic(`+, -, *, /, **`) and dice rolls—but **limitlessly nested**!
 
 - Try rolling: `d20`
 - Do some basic arithmetic: `3d10 + 4`
@@ -51,6 +51,7 @@ Then hit `evaluate` and watch the dice roller give you a detailed breakdown of t
   - [Grammars](#grammars)
     - [Full Grammar](#full-grammar)
     - [Precursor Grammar](#precursor-grammar)
+  - [A Final Note](#a-final-note)
 - ~~How? - The parser implementation.~~ \<\-\- Coming soon!
 
 # Huh?
@@ -75,13 +76,13 @@ Then I realized I'd have to make a notation. Just like how calculators need a sy
 
 And then I realized that there's a lot more the average user wants out of dice than just "roll $X$ dice with $Y$ sides(and maybe add or subtract a little)". You might want to keep the $X$ highest dice. Or the $ X $ lowest dice. Or reroll on an $ X $ result. Or, well, you get the idea. There are as many ways to roll dice as there are people in the pews. There exist a million and one tabletop roleplaying games that have made up their own stupid types of dice rolls. Which begs the question: why are current dice roll offerings so opinionated?
 
-If you don't know the current state of the digital dice rolling world(which is the position of the vast majority of people), don't worry about it. However, if you do, please think to yourself: when using a dice bot on Discord, or a dice roller online, or anything of the sort, how quickly can you find something that it can't do—and not only _can't_ do, but _can't ever possibly do_. I'd venture pretty quickly.
+If you don't know the current state of the digital dice rolling world(which is the position of the vast majority of people), don't worry about it. However, if you do, please think to yourself: when using a dice bot on Discord, or a dice roller online, or anything of the sort, how quickly can you find something that it can't do—and not only _can't_ do, but _can't ever possibly do_? I'd venture pretty quickly.
 
-Imagine you're a game designer. You want to make the _next big tabletop roleplaying game_. Now, immediately, you have two choices: alienate anybody who wants to roll dice in your game digitally and use a new, quirky system, _or_ make your game compatible with the basic D&D style of dice rolling. So, either sacrifice an avenue of potential creativity and innovation, or your audience.
+Imagine you're a game designer. You want to make the _next big tabletop roleplaying game_. Immediately, you are forced to choose: either alienate anybody who wants to roll dice digitally and use a quirky/innovative new system, _or_ make your game compatible with the bog-standard D&D style. So, either sacrifice an avenue of potential creativity, or your audience.
 
 As a game master for tabletop gaming myself, I strongly believe that your table is your own. There is a wonderful beauty to allowing each and every combination of people to infuse the hobby with whatever quirks and nuances they desire. As such, I believe every aspect of the hobby should facilitate this. Just as Matt Colville says, every DM becomes, is, and always was a game designer. Designers deserve flexible tools. Players, busy with jobs, studies, or responsibilities, deserve to have the tools they use to be as straightforward as possible, consistent across applications and platform. A standard—that's what we need. A way for humans and computers to both understand how the dice should be, will be, and have been tossed. A flexible and extensible standard that anyone can add to. A new dice notation for the digital age.
 
-This, my friends, is where Tyche comes in. The Tyche Notation: one standard notation to rule them all—to serve every purpose and every game. Let's roll.
+This is where Tyche comes in. The Tyche Notation: one standard notation to rule them all—to serve every purpose and every game.
 
 ## What?
 
@@ -89,12 +90,13 @@ This, my friends, is where Tyche comes in. The Tyche Notation: one standard nota
 >
 > This specification describes the syntax for the Tyche Notation, a notation for dice rolls that is human & machine readable, unopinionated, comprehensive, rigorous, flexible, and extensible. This is a a draft, and will be updated as lessons are learned during the implementation process.
 >
-> - `Draft Version: 0.1`
+> - `Draft Version: 0.1.1`
+>   - Changes: Fixed spelling errors, added "A Final Note" section, changed "Technical Specification" from a table to a more readable list.
 > - `Date: 2023-04-14`
 
 Above all, Tyche follows a number of patterns:
 
-- **Familiar** - Tyche takes inspiration from the dice notation you're already familiar with. If you've ever played a tabletop roleplaying game, you're already mostly familiar. We've just added some things to supercharge the complicated parts and make them easier to understand. We've also made it more consistent and reliable. Want to roll a dice and use the result as the amount of sides another die has? Tyche makes it easy.
+- **Familiar** - Tyche takes inspiration from the dice notation you're already familiar with. If you've ever played a tabletop roleplaying game, you're already mostly familiar. Tyche aims to be complex in potential but simple in usage—consistent and reliable. Want to roll a die and use the result as the amount of sides for another roll? Tyche makes it easy.
 - **Flexible** - A key component of Tyche is extensibility. If your implementation of Tyche isn't extensible, it's not Tyche. There's a basic subset of intended features inspired by [Sophie's Dice](https://sophiehoulden.com/dice/documentation/notation.html), but everything past that is up to you. Want to add your own functions, manipulators, and transformations? Simply write some Python and plug it in—that's the standard Tyche sets up.
 - **Feature-filled** - Tyche is designed to cover all the bases. Strings and integers. Arithmetic and functions. Dice and manipulation of them. As best as we can, we've tried to make Tyche the most comprehensive standard possible.
 
@@ -142,46 +144,75 @@ Below are some more advanced examples of Tyche expressions.
 
 Here are the elements of the syntax(square brackets are used to represent variability):
 
-| Item                                                                       | Identifier | Function                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| -------------------------------------------------------------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| +                                                                          | ADD        | Addition                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| -                                                                          | SUB        | Subtraction, or used unarily to indicate a negative sign of a number                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| \*                                                                         | MULT       | Multiplication                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| /                                                                          | DIV        | Division — this will give a decimal output when warranted                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| //                                                                         | IDIV       | Integer division                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| %                                                                          | MODU       | Modulo, used to get remainder                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| "[some characters]"                                                        | STR        | A string of characters. Characters can be escaped using a backslash.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| p[n]                                                                       | PAR        | A string or number parameter. Will be written as "p1, p2, ..." in following examples.                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| ([EXPR])                                                                   | SEXP       | Parentheses can be used to enclose an expression.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| [X]d[Y]                                                                    | ROLL       | Rolls. Roll X number of Y-sided dice. X and Y can be numbers but they can also be parenthetical expressions(also called subexpressions), which evaluate to a number for the roll's input. X is optional. If X is not given, default to 1.                                                                                                                                                                                                                                                                                                                         |
-| [ROLL]M\{p1, p2 ...\}<br />OR<br />[ROLL]Mp                                | MANI       | Manipulators. They always follow a roll. They can have one number param next to the Manipulator identifier, or they can have one or more string or number parameters (or expressions/subexpressions that evaluate to integers or strings) within curly braces. The names of manipulators must be 1 or 2 sequential characters or symbols. They evaluate to a "dice tray", meaning a modified version of the initial role. Manipulators can be chained, so that one can modify the output of the last. Once the last modifier is evaluated, the tray is summed up. |
-| [EXPR].Trans\(p1, p2, p3\)<br />OR<br />[SEXP].Trans(p1, p2, ...)          | TRAN       | Transformers. They always follow an expression or subexpression. The syntax is expr/sexp, a period, then the name of the transformer, followed by parentheses, which either do or don't contain a number of string or integer parameters (or expressions/subexpressions that evaluate to integers or strings). The names of transformers must be ASCII alphanumeric + underscores, and cannot begin with a number or underscore. They evaluate to numbers or strings.                                                                                             |
-| Func(p1, p2, ...)                                                          | FUNC       | Functions. They stand alone. The syntax is the name of the function followed by parentheses, which either do or don't contain a number of string or integer parameters (or expressions/subexpressions that evaluate to integers or strings). The names of functions must be ASCII alphanumeric + underscores, and cannot begin with a number or underscore. They evaluate to numbers or strings.                                                                                                                                                                  |
-| [X]d\<p1, p2, ...>                                                         | CROL       | Custom dice. X is optional. If X is not given, default to 1. When rolled, chooses from one of the given string/int parameters at random. 1 or more parameters are required.                                                                                                                                                                                                                                                                                                                                                                                       |
-| [EXPR], [EXPR], ...                                                        | TYCH       | This is the top-level component of the notation. Each input of dice notation is one or more comma-separated arithmetic dice expressions.                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| # [Any text]<br />OR<br />###<br />[Any text]<br />[Across lines]<br />### | COM        | Comments. Either single line or multiline.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-
+*   ADD
+    *   Format: `+`
+    *   Function: Addition
+*   SUB
+    *   Format: `-`
+    *   Function: Subtraction, or used unarily to indicate a negative sign of a number
+*   MULT
+    *   Format: `*`
+    *   Function: Multiplication
+*   DIV
+    *   Format: `/`
+    *   Function: Division — this will give a decimal output when warranted
+*   IDIV
+    *   Format: `//`
+    *   Function: Integer division
+*   MODU
+    *   Format: `%`
+    *   Function: Modulo, used to get remainder
+*   STR
+    *   Format: `"[some characters]"`
+    *   Function: A string of characters. Characters can be escaped using a backslash.
+*   PAR
+    *   Format: `p[n]`
+    *   Function: A string or number parameter. Will be written as "p1, p2, ..." in following examples.
+*   SEXP
+    *   Format: `([EXPR])`
+    *   Function: Parentheses can be used to enclose an expression.
+*   ROLL
+    *   Format: `[X]d[Y]`
+    *   Function: Rolls. Roll X number of Y-sided dice. X and Y can be numbers but they can also be parenthetical expressions(also called subexpressions), which evaluate to a number for the roll's input. X is optional. If X is not given, default to 1.
+*   MANI
+    *   Format: `[ROLL]M{p1, p2 ...}` or `[ROLL]Mp`
+    *   Function: Manipulators. They always follow a roll. They can have one number param next to the Manipulator identifier, or they can have one or more string or number parameters (or expressions/subexpressions that evaluate to integers or strings) within curly braces. The names of manipulators must be 1 or 2 sequential characters or symbols. They evaluate to a "dice tray", meaning a modified version of the initial role. Manipulators can be chained, so that one can modify the output of the last. Once the last modifier is evaluated, the tray is summed up.
+*   TRNF
+    *   Format: `[EXPR].Transf(p1, p2, p3)` or `[SEXP].Transf(p1, p2, ...)`
+    *   Function: Transformers. They always follow an expression or subexpression. The syntax is expr/sexp, a period, then the name of the transformer, followed by parentheses, which either do or don't contain a number of string or integer parameters (or expressions/subexpressions that evaluate to integers or strings). The names of transformers must be ASCII alphanumeric + underscores, and cannot begin with a number or underscore. They evaluate to numbers or strings.
+*   FUNC
+    *   Format: `Func(p1, p2, ...)`
+    *   Function: Functions. They stand alone. The syntax is the name of the function followed by parentheses, which either do or don't contain a number of string or integer parameters (or expressions/subexpressions that evaluate to integers or strings). The names of functions must be ASCII alphanumeric + underscores, and cannot begin with a number or underscore. They evaluate to numbers or strings.
+*   CROL
+    *   Format: `[X]d<p1, p2, ...>`
+    *   Function: Custom dice. X is optional. If X is not given, default to 1. When rolled, chooses from one of the given string/int parameters at random. 1 or more parameters are required.
+*   TYCH
+    *   Format: `[EXPR], [EXPR], ...`
+    *   Function: This is the top-level component of the notation. Each input of dice notation is one or more comma-separated arithmetic dice expressions.
+*   COM
+    *   Format: `# [Any text]` or `### [Any text] [Across lines] ###`
+    *   Function: Comments. Either single line or multiline.
 ## Notes
 
 ### On Nesting
 
-Nesting is allowed and prioritized. Since functions, manipulators, and transformers all evaluate to values that can be used as input to other functions, manipulators, and transformers, there can be nested calls. Subexpressions can be nested in other subexpressions. Subexpressions can contain FUNC/MANI/TRAN and complex arithmetical operations, which are then nested within other operations, ad nauseaum.
+Nesting is allowed and prioritized. Since functions, manipulators, and transformers all evaluate to values that can be used as input to other functions, manipulators, and transformers, there can be nested calls. Subexpressions can be nested in other subexpressions. Subexpressions can contain FUNC/MANI/TRNF and complex arithmetical operations, which are then nested within other operations, ad nauseaum.
 
 ### On Operator Precedence
 
-Arithmetic operators follow the same precedence as Python. If same precedence, left-to-right evaluation is followed.The deepest nested FUNC/MANI/TRAN/EXPR/SEXP gets evaluated first.
+Arithmetic operators follow the same precedence as Python. If same precedence, left-to-right evaluation is followed.The deepest nested FUNC/MANI/TRNF/EXPR/SEXP gets evaluated first.
 
 ### On Extensibility
 
-The goal of Tyche is to be _extensible_. This is done through FUNC, MANI, and TRAN. Developers can write their own FUNC, MANI, and TRAN in a scripting language(to be decided on later), and then use them as plugins.
+The goal of Tyche is to be _extensible_. This is done through FUNC, MANI, and TRNF. Developers can write their own FUNC, MANI, and TRNF in a scripting language(to be decided on later, likely Python or Lua), and then use them as plugins.
 
-You'll notice I haven't defined a strict set of FUNC/MANI/TRAN. That's on purpose. The parser will assume that any valid FUNC/MANI/TRAN name is valid, and then if it _isn't_, it'll be found out during runtime.
+You'll notice I haven't defined a strict set of FUNC/MANI/TRNF. That's on purpose. The parser will assume that any valid FUNC/MANI/TRNF name is valid, and then if it _isn't_, it'll be found out during runtime.
 
 ### On Invalid Inputs
 
 Since extensibility is the goal, a lot of unpredictability is introduced. What happens when a string input is given to something that expects a number, or vice versa? Answer: an error is thrown during runtime, giving a detailed output of where the error happened. String vs. number inputs aren't educated in the grammar itself.
 
-Since the parser cannot know all valid FUNC/MANI/TRAN names, it should parse them as generic identifiers following the specified naming rules. During the evaluation phase, the system will attempt to resolve these identifiers to actual implementations. If an identifier cannot be resolved to a valid FUNC/MANI/TRAN, an error will be reported at runtime.
+Since the parser cannot know all valid FUNC/MANI/TRNF names, it should parse them as generic identifiers following the specified naming rules. During the evaluation phase, the system will attempt to resolve these identifiers to actual implementations. If an identifier cannot be resolved to a valid FUNC/MANI/TRNF, an error will be reported at runtime.
 
 ### On Whitespace
 
@@ -203,8 +234,8 @@ sexp           ::= '(' expr ')'
 roll            ::= [number | sexp]? 'd' (number | sexp) [mani]*
 crol            ::= [number | sexp]? 'd<' par (',' par)+ '>'
 mani            ::= 'M' ('{' par (',' par)* '}' | number)
-texp            ::= expr tran
-tran            ::= '.' identifier '(' [par (',' par)*]? ')'
+texp            ::= expr trnf
+trnf            ::= '.' identifier '(' [par (',' par)*]? ')'
 func            ::= identifier '(' [par (',' par)*]? ')'
 par             ::= number | string | expr
 number          ::= ['-']? digit+ ['.' digit+]?
@@ -245,3 +276,13 @@ character       ::= any printable character
 - Functions: `F1(3, 4)`, `F2("A", 3)`
 - Complex expressions: `(2+3*4)d6M{1}.T1("A", 2)+F1(4,5)`
 - Comments: `# A single line comment`, `###A multiline comment###`
+
+# A Final Note
+
+The key takeaways from this specification should be that:
+
+- An implementation is currently being written.
+- As a result, this specification is still a draft! As such, it is subject to change. It'll be versioned, and changes will be documented.
+  - Things that relate more to specific implementation (how extensions are implemented, how errors are specifically handled, etc.) will be written up during the trial-by-fire of the implementation process.
+
+The eventual goal is to offer a straightforward extensible dice parser, specifically catered to developers. Hence, the implementation is being written in Rust. This will allow for a solid and fast core library, which can be built into Python and JavaScript bindings. Keep an eye out for the first release!
