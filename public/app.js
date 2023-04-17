@@ -103,6 +103,11 @@ document.addEventListener("turbolinks:load", function () {
 
   apply_theme_colors_dynamically();
   fix_mailto_links();
+  console.log(
+    "%cNOTE: Astro + Github Pages fuckery is getting rid of the lang attribute on the html element. We are setting it in JS as a workaround.",
+    "color: yellow;"
+  );
+  document.documentElement.lang = "en";
   if (
     !window.location.pathname.includes("/blog/") &&
     !window.location.pathname.includes("/work/")
