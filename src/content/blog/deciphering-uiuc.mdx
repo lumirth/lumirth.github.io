@@ -1,0 +1,110 @@
+---
+title: "Deciphering the UIUC courses API"
+description: "Funnily enough, the university with the 5th best CS program has a wonky course API."
+pubDate: "Apr 16 2023 20:27"
+updatedDate: "Apr 16 2023 20:27"
+heroImage: "/blog/wires.jpg"
+visible: true
+---
+
+So, the University of Illinois Urbana-Champaign[^1] has an API for course information. It exists as a part of something called the "Course Information Suite", or CIS for short. As far as I can tell, the documentation is out of date, or at the very least fails to accurately describe how to utilize the API. This post details what I've deciphered about the API and how you can use it.
+
+---
+
+# Table of Contents
+
+- [The Problem(s)](#the-problems)
+- [The Solution](#the-solution)
+    - [GenEds](#geneds)
+    - [The XML Schema](#the-xml-schema)
+- [Conclusion](#conclusion)
+
+---
+
+# The Problem(s)
+
+The gist of the issue seems to be that, at some point, they decided to consolidate the API but failed to update the documentation alongside it. The [CIS documentation](https://courses.illinois.edu/cisdocs/) is split up into three sections[^2]:
+
+- [CIS API Documentation](https://courses.illinois.edu/cisdocs/api)
+- [Data Explorer App](https://courses.illinois.edu/cisdocs/explorer)
+- [Link Dispatcher App](https://courses.illinois.edu/cisdocs/dispatcher)[^3]
+
+Each of these describe endpoints attached to the `courses.illinois.edu` URL.
+
+- CIS API Documentation = `/cisapi`
+- Data Explorer App = `/cisapp/explorer`
+- Link Dispatcher App = `/cisapp/dispatcher`
+
+Now, the key error in the documentation is this:
+
+...the `/cisapi` endpoint **does not work**. 
+
+Play with it as much as you like, you will consistently find yourself with an HTML 404 page response. So... how do you get course data, then? The obvious answer is "the Data Explorer App, duh"... which is essentially the response I received when I got in touch with the University's head software engineer—a tad discouraging, to say the least[^4].
+
+You see, the Data Explorer App documentation is a lot sparser that the CIS API documentation. It doesn't have the detailed description of endpoints (`/schedule/year`, `schedule/courses`, etc) that the CIS API documentation does. It semed that, through the aforementioned consolidation, we no longer had access to a number of useful endpoints.
+
+However, if you've done your due diligence, you'll notice that by [searching Github](https://github.com/search?q=cisapp%2Fexplorer&type=code) you can find how people have used the `/cisapp/explorer` endpoints. And, if you're like me, you'll come to a sinking realization: 
+
+**...all the `/cisapi/schedule` endpoints work if you make them match the `/cisapp/explorer` format.**
+
+# The Solution 
+
+Once I figured out that this was the main error in the documentation, I threw together a tool that can take any example URL from the documentation of the `/cisapi/schedule` endpoints, and make it a working `/cisapp/explorer/schedule` endpoint. And, due to the flexibility of the `/schedule/courses` endpoint, the need for functioning `/gened`, `/term`, `/subjects` endpoints(which don't work with the Data Explorer) was negated. You can access the tool below:
+
+<br/>
+
+
+import Card from '../../components/Card.astro';
+
+<Card 
+    title="cisurls"
+    href="https://mirth.cc/cisurls-web/"
+    description="A few dead-simple utilities that fix/modify/convert the URLs for UIUC's Course Information Suite API. [(Web source code)](https://github.com/lumirth/cisurls-web) [(Module source code)](https://github.com/lumirth/cisurls) "
+    tags_icon={[ "devicon-svelte-plain colored", "devicon-npm-original-wordmark colored" ]}
+    tags_text={[]}
+    link_enabled={true}
+    tags_enabled={true}
+    link_external={true}
+/>
+<br/>
+
+The moral of the story, then, is that if you want to build a project that uses the UIUC CIS API, you can simply reference the `/cisapi` documentation to your heart's content, and use the above tool to get the corresponding `/cisapp/explorer` URL when you need it. That way, you get all the detail out of the `/cisapi` documentation, and all the actually-working functionality of the `/cisapp/explorer` endpoints.
+
+## GenEds
+
+...and if you'd like to use the [`schedule/courses`](https://courses.illinois.edu/cisdocs/api/GET/schedule/courses) endpoint to find courses that match a particular gened requirement, you can use the following codes[^5]:
+
+| Name                                                             | Code    |
+| ---------------------------------------------------------------- | ------- |
+| Composition I                                                    | `COMP1` |
+| Advanced Composition                                             | `1CLL`  |
+| Humanities and the Arts: (Both)                                  | `HUM`   |
+| Humanities and the Arts: Literature & the Arts                   | `1LA`   |
+| Humanities and the Arts: Historical & Philosophical Perspectives | `1HP`   |
+| Natural Sciences and Technology: (Both)                          | `NAT`   |
+| Natural Sciences and Technology: Life Science                    | `1LS`   |
+| Natural Sciences and Technology: Physical Science                | `1PS`   |
+| Quantitative Reasoning I                                         | `1QR1`  |
+| Quantitative Reasoning II                                        | `1QR2`  |
+| Social and Behavioral Sciences: (Both)                           | `SBS`   |
+| Social and Behavioral Sciences: Social Science                   | `1SS`   |
+| Social and Behavioral Sciences: Behavioral Science               | `1BSC`  |
+| Cultural Studies: (Both)                                         | `CS`    |
+| Cultural Studies: Western/Comparative Cultures                   | `1WCC`  |
+| Cultural Studies: Non-Western Cultures                           | `1NW`   |
+| Cultural Studies: US Minority Cultures                           | `1US`   |
+
+
+## The XML Schema
+
+Another issue with the documentation is that the link to the XML schema is broken. Thankfully, I was able to gain access to it during my correspondence with the head software engineer. I've hosted it on Github, and a link to download it can be found found under the tool I mentioned earlier, at [mirth.cc/cisurls-web/cisapi.xsd](https://mirth.cc/cisurls-web/cisapi.xsd).
+
+# Conclusion
+
+This was by no means a comprehensive explanation of the UIUC CIS API. Frankly, the only place you could get that would be from the minds behind it, and I doubt they have the time or energy to exhaustively elaborate on how this stuff works. At the very least, I hope this post helps clear some of the fog around the API and make it easier to understand and utilize for tinkering students. All of this is stuff I've figured out by getting my hands dirty, and it is entirely possible that I've written here some misconception or mistake. Please take everything with a grain of salt, and if you have any questions, feel free to [reach out to me by email](mailto:lu[at]mirth[dot]cc).
+
+[^1]: Yes, the Urbana-Champaign campus specifically. While the core registration system may overlap somewhat between the three universities in the system, a lot of the specifics, like the CIS API, are unique to their respective universities. Last I checked, UIC has some [sort of equivalent](https://tools.aes.uic.edu/catalog-parser/). It seems to be better documented, which is funny, because of all the universities in the system to have a good API, you would think it'd be UIUC, #5 CS program in the nation. But no, the good API belongs to its northerly sister-school known for medicine.
+[^2]: If the documentation gets updated in the future and fixes the issues mentioned here, you can view the what the documentation looked like around the time this post was written at [web.archive.org](https://web.archive.org/web/20160517202637/courses.illinois.edu/cisdocs/api).
+[^3]: This is the portion of the Course Information Suite that I've interacted the least with. Genuinely, no real idea what's going on here or what it's used for. 
+[^4]: To be clear, I bare no ill will. I'm sure he's got a lot more serious things on his plate than to answer one student's complaints and misunderstandings of what is a rather functional API, all things considered. His correspondence was crucial in furthering my understanding.
+[^5]: Which I figured out by manually paging through all the options in the banner registration system.
