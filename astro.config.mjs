@@ -12,7 +12,7 @@ import webmanifest from "astro-webmanifest";
 import customTheme from './monokai.json';
 import remarkCustomMedia from "./remark-rehype-plugins/remarkCustomMedia"; // Import the custom plugin
 import rehypeStyleFixes from "./remark-rehype-plugins/rehypeStyleFixes";
-import rehypeLangElement from "./remark-rehype-plugins/rehypeLangElement";
+// import rehypeLangElement from "./remark-rehype-plugins/rehypeLangElement";
 
 /** @type {import('astro-m2dx').Options} */
 import svelte from "@astrojs/svelte";
@@ -41,7 +41,7 @@ export default defineConfig({
     remarkPlugins: [remarkMath, remarkDirective, [m2dx, m2dxOptions], remarkCustomMedia],
     rehypePlugins: [[rehypeKatex, {
       // Katex plugin options
-    }], rehypeStyleFixes, rehypeLangElement],
+    }], rehypeStyleFixes],
     shikiConfig: {
       theme: customTheme,
       langs: []
