@@ -1,0 +1,26 @@
+---
+import { getCollection } from 'astro:content';
+import Card from '../components/Card.astro';
+
+// if not visible, don't render
+const all_posts = (await getCollection('blog')).filter((post) => post.data.visible);
+const dated_posts = all_posts.filter((post) => post.data.pubDate);
+
+// Sort posts by date and get the latest post
+const latest_post = dated_posts.sort(
+	(b, a) => (new Date(String(a.data.pubDate))).valueOf() - (new Date(String(b.data.pubDate))).valueOf()
+)[0];
+---
+
+<!-- Render the latest post using the Card component -->
+{ latest_post && (
+	<Card
+		title={latest_post.data.title}
+		href={`/blog/${latest_post.slug}/`}
+		description={latest_post.data.description}
+		link_enabled={true}
+	/>
+)}
+
+<!-- Render a message if there are no posts available -->
+{ !latest_post && <code class="text--big-technical">NO POSTS AVAILABLE</code> }

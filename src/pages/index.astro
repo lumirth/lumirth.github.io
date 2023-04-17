@@ -2,12 +2,62 @@
 import Card from '../components/Card.astro';
 import Main from '../components/Main.astro';
 import {Content as Index} from '../components/pages/index.md';
+import LatestBlogPost from '../components/LatestBlogPost.astro';
+import LatestProject from '../components/LatestProject.astro';
 ---
 
 <meta charset="utf-8" />
 <!DOCTYPE html>
 <html lang="en">
 	<Main page_title="MIRTH">
-		<Index />
+		<div class="container">
+			<div class="main-content">
+				<Index />
+			</div>
+			<hr class="hori-line"/>
+			<div class="right-column">
+				<p style="line-height:1;">Latest blog post:</p>
+				<LatestBlogPost />
+				<p style="line-height:1;">Latest project:</p>
+				<LatestProject />
+			</div>
+		</div>
 	</Main>
 </html>
+
+<style>
+.container {
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column; /* Stack the content vertically on mobile */
+}
+
+.main-content {
+}
+
+.right-column {
+	padding-top: 1rem; /* Add some padding around the content */
+	padding-bottom: 2rem;
+}
+
+
+/* Media query for desktop devices */
+@media (min-width: 768px) {
+	.container {
+		flex-direction: row; /* Display content side by side on desktop */
+	}
+
+	.main-content {
+		flex: 1; /* Take up the remaining space in the container */
+		padding: 0;
+		padding-right: 1rem;
+	}
+
+	.right-column {
+		width: 350px; /* Set a fixed width for the right column */
+		padding: 0;
+		padding-left: 1rem;
+	}
+}
+</style>

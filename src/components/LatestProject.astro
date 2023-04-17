@@ -1,0 +1,27 @@
+---
+import { getCollection } from 'astro:content';
+import Card from '../components/Card.astro';
+
+// if not visible, don't render
+const all_posts = (await getCollection('work')).filter((post) => post.data.visible);
+const dated_posts = all_posts.filter((post) => post.data.pubDate);
+
+// Sort posts by date and get the latest post
+const latest_project = dated_posts.sort(
+	(b, a) => (new Date(String(a.data.pubDate))).valueOf() - (new Date(String(b.data.pubDate))).valueOf()
+)[0];
+---
+
+<!-- Render the latest project using the Card component -->
+{ latest_project && (
+	<Card 
+		title={latest_project.data.title} 
+		href={`/work/${latest_project.slug}/`} 
+		description={latest_project.data.description} 
+		link_enabled={true}
+		tags_enabled={true}
+	/>
+)}
+
+<!-- Render a message if there are no projects available -->
+{ !latest_project && <code class="text--big-technical">NO PROJECTS AVAILABLE</code> }
