@@ -1,6 +1,6 @@
 ---
 title: "COURSE WARLOCK"
-description: "Finding courses at the University of Illinois has never been more bearable! Detailed course search, professor ratings, and average GPA all in one place."
+description: "A course search engine superchaged with professor ratings and GPA data. Finding courses at UIUC has never been more bearable! ([Source code](https://github.com/lumirth/warlock))"
 pubDate: "May 09 2023"
 updatedDate: "May 09 2023"
 banner_source: "/warlock/swirly-colors.jpeg"
@@ -9,10 +9,15 @@ image_alt: "A swirly sparkly combination of colors. Perhaps a bubble or glass or
 tags_icon:
     - "devicon-svelte-plain colored"
     - "devicon-python-plain colored"
+    - "devicon-tailwindcss-plain colored"
     - "devicon-fastapi-plain colored"
-    - "devicon-nodejs-plain colored"
-    - "devicon-npm-original-wordmark colored"
 tags_text: []
 tags: []
-visible: false
+visible: true
 ---
+
+![Course Warlock in the browser with a search for 'prof: livengood, philosophy'](/warlock/warlock-in-browser.png)
+
+This project has been, by far, my largest and most complicated technical undertaking. The process involved [deciphering a terribly documented university API](https://mirth.cc/blog/deciphering-uiuc) & writing [a module to fix it](https://github.com/lumirth/cisurls), as well as writing [a Python module to interact with RateMyProfessor](https://github.com/lumirth/rmpy) from scratch, writing [a system to dynamically parse search queries into a set of advanced parameters](https://github.com/lumirth/warlock/blob/main/backend/app/models/parse.py), and a whole host more. As a result, I have yet to give a complete writeup of the project. This is where that writeup will exist once I'm clear of finals and the spring semester and have a chance to sit down and write it.
+
+Until then, you can use Course Warlock at [warlock.mirth.cc](https://warlock.mirth.cc) and view the source code [on my GitHub](https://github.com/lumirth/warlock).
