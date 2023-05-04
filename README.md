@@ -10,4 +10,4 @@ I've organized my site as follows:
 
 I chose the word 'work' instead of 'projects' or 'portfolios' mostly because it was four letters long and fit better alongide 'blog' and 'info'. That said, I also feel the word better represents what I want to show off on the page. 
 
-I made this site to have a place to keep projects and writing worth sharing. I built it to be as performant as reasonably possible to allow for a smooth browsing experience. People don't spend much time on personal websites—may as well make it a good experience while they're there. 
+I made this site to have a place to keep projects and writing worth sharing. I built it to be as performant as reasonably possible. People don't spend much time on personal websites—may as well make it a good experience while they're there. 
