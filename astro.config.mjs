@@ -26,10 +26,10 @@ export default defineConfig({
   integrations: [mdx(), sitemap(), turbolinks(), image({
     serviceEntryPoint: '@astrojs/image/sharp'
   }), webmanifest({
-    name: '[MIRTH.CC]',
+    name: 'LUMIRTH - Lukas Unguraitis',
     icon: 'src/mirth-wb.svg',
     short_name: 'MIRTH',
-    description: 'Lumirth\'s Domain',
+    description: '@lumirth\'s corner of the worldwide web.',
     start_url: '/',
     display: 'standalone',
     config: {
