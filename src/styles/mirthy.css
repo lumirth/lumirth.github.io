@@ -71,6 +71,14 @@
   min-height: calc(100vh - 200px);
 }
 
+/* target iOS devices */
+@supports (-webkit-touch-callout: none) {
+  .page__content {
+    min-height: calc(100vh - 250px);
+  }
+}
+
+/* desktop */
 @media screen and (min-width: 768px) {
   .page {
     /* replaced body */
@@ -554,4 +562,20 @@ article {
   justify-content: center;
   flex-wrap: wrap;
   gap: 0.5rem;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                  comments                                  */
+/* -------------------------------------------------------------------------- */
+
+.comments {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+@media (min-width: 769px) {
+    .comments {
+        margin-top: 2rem;
+        margin-bottom: 0rem;
+    }
 }
