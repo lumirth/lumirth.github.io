@@ -9,16 +9,20 @@ import LatestProject from '../components/LatestProject.astro';
 <meta charset="utf-8" />
 <!DOCTYPE html>
 <html lang="en">
-	<Main page_title="MIRTH">
+	<Main page_title="LUMIRTH - Lukas Unguraitis">
 		<div class="container">
 			<div class="main-content">
 				<Index />
 			</div>
-			<hr class="hori-line"/>
+			<!-- <hr class="hori-line"/> -->
 			<div class="right-column">
-				<p style="line-height:1;">Latest blog post:</p>
+				<div style="margin-left:auto; margin-right:auto; max-width:600px;">	
+					<p style="line-height:1; max-width:600px;">Latest blog post:</p>
+				</div>
 				<LatestBlogPost />
-				<p style="line-height:1;">Latest project:</p>
+				<div style="margin-left:auto; margin-right:auto; max-width:600px;">	
+					<p style="line-height:1;">Latest project:</p>
+				</div>
 				<LatestProject />
 			</div>
 		</div>
@@ -37,7 +41,7 @@ import LatestProject from '../components/LatestProject.astro';
 }
 
 .right-column {
-	padding-top: 1rem; /* Add some padding around the content */
+	padding-top: 0.5rem; /* Add some padding around the content */
 	padding-bottom: 2rem;
 }
 
