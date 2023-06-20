@@ -63,7 +63,7 @@
 }
 
 .page__content {
-    /* replaced main */
+  /* replaced main */
   line-height: 1.75;
   margin-left: auto;
   margin-right: auto;
@@ -89,7 +89,6 @@
     min-height: calc(100vh - 365px);
   }
 }
-
 
 /* -------------------------------------------------------------------------- */
 /*                 code and code blocks, inline and otherwise                 */
@@ -429,8 +428,10 @@ article {
   color: var(--faded-text-color);
 }
 
-.data-footnote-backref:hover {
-  color: var(--accent-color);
+@media (min-width: 769px) {
+  .data-footnote-backref:hover {
+    color: var(--accent-color);
+  }
 }
 
 .last-updated-on {
@@ -569,13 +570,13 @@ article {
 /* -------------------------------------------------------------------------- */
 
 .comments {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 @media (min-width: 769px) {
-    .comments {
-        margin-top: 2rem;
-        margin-bottom: 0rem;
-    }
+  .comments {
+    margin-top: 2rem;
+    margin-bottom: 0rem;
+  }
 }
