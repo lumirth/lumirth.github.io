@@ -58,8 +58,17 @@
   /* set default font across the page */
   font-family: "Inter", sans-serif;
   /* center the body horizontally */
-  margin: 0 auto 3rem;
+  margin: 0 auto 0;
   padding: 1rem;
+}
+
+.page__content {
+    /* replaced main */
+  line-height: 1.75;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 3rem;
+  min-height: calc(100vh - 200px);
 }
 
 @media screen and (min-width: 768px) {
@@ -67,14 +76,11 @@
     /* replaced body */
     max-width: 850px;
   }
+  .page__content {
+    min-height: calc(100vh - 400px);
+  }
 }
 
-.page__content {
-  /* replaced main */
-  line-height: 1.75;
-  margin-left: auto;
-  margin-right: auto;
-}
 
 /* -------------------------------------------------------------------------- */
 /*                 code and code blocks, inline and otherwise                 */
