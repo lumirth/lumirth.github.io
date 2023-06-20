@@ -27,7 +27,7 @@ export default defineConfig({
     serviceEntryPoint: '@astrojs/image/sharp'
   }), webmanifest({
     name: 'LUMIRTH - Lukas Unguraitis',
-    icon: 'src/mirth-wb.svg',
+    icon: 'src/laumono.svg',
     short_name: 'MIRTH',
     description: '@lumirth\'s corner of the worldwide web.',
     start_url: '/',
