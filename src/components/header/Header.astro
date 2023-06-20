@@ -5,12 +5,13 @@ import { SITE_TITLE } from "../../consts";
 
 <header class="header">
   <a class="header__title-link" href="/">
-    [{SITE_TITLE}]
+    []
   </a>
   <div class="header__navbar">
     <nav class="nav">
       <ul class="nav__list">
         <!-- <li><HeaderLink href="/">HOME</HeaderLink></li> -->
+        <li class="nav__list-item"><HeaderLink class="nav__link" href="/">HOME</HeaderLink></li>
         <li class="nav__list-item"><HeaderLink class="nav__link" href="/blog">BLOG</HeaderLink></li>
         <li class="nav__list-item"><HeaderLink class="nav__link" href="/work">WORK</HeaderLink></li>
         <li class="nav__list-item"><HeaderLink class="nav__link" href="/info">INFO</HeaderLink></li>
@@ -20,15 +21,7 @@ import { SITE_TITLE } from "../../consts";
 </header>
 <style>
   .header__title-link {
-    text-decoration: none;
-    color: inherit;
-    font-size: x-large;
-    font-family: "Fira Code", monospace;
-    font-size: 2.25rem;
-    font-weight: 700;
-    margin: 0;
-    margin-left: auto;
-    margin-right: auto;
+    visibility: hidden;
   }
 
   .header__navbar-spacer {
@@ -38,11 +31,12 @@ import { SITE_TITLE } from "../../consts";
   .nav {
     z-index: 1;
     position: fixed;
-    bottom: 0;
+    top: 0;
     left: 0;
     width: 100%;
     background-color: var(--item-background-color);
-    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    padding-top: 0.5rem;
   }
 
   .nav__list {
@@ -51,10 +45,12 @@ import { SITE_TITLE } from "../../consts";
     padding: 0;
     margin: 0;
     list-style: none;
+    padding-right:0.5rem;
+    padding-left:0.5rem;
   }
 
   .nav__list-item {
-    padding: 0.75rem 0;
+    padding: 0.5rem 0;
     flex: 1;
     text-align: center;
   }
@@ -75,7 +71,6 @@ import { SITE_TITLE } from "../../consts";
 
   .nav__link.active {
     color: var(--power-text-color);
-    font-weight: bold;
     position: relative;
     cursor: pointer !important;
   }
@@ -96,7 +91,7 @@ import { SITE_TITLE } from "../../consts";
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 2.25rem;
+    margin-bottom: 1rem;
     margin-top: 1rem;
   }
 
@@ -104,15 +99,22 @@ import { SITE_TITLE } from "../../consts";
     padding-bottom: 0.5rem;
   }
 
-  @media all and (display-mode: standalone) {
+  /* @media all and (display-mode: standalone) {
     .nav {
       padding-bottom: 1rem;
     }
-  }
+  } */
 
   @media screen and (min-width: 768px) {
     .header__title-link {
       margin: 0;
+      visibility: visible;
+      text-decoration: none;
+      color: inherit;
+      font-size: x-large;
+      font-family: "Fira Code", monospace;
+      font-size: 2.25rem;
+      font-weight: 700;
     }
 
     .nav {
@@ -126,7 +128,7 @@ import { SITE_TITLE } from "../../consts";
     }
 
     .nav__list {
-      width: 15rem;
+      width: 20rem;
     }
 
     .nav__list-item {
