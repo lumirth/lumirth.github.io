@@ -9,29 +9,38 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 ---
 
 <html lang="en">
-	<head>
-		<BaseHead title={title} description={description} />
-	</head>
+    <head>
+        <BaseHead title={title} description={description} />
+    </head>
 
-	<body class="page">
-		<Header />
-		<div class="image-banner">
-		<img class="image-banner__image" src={heroImage} alt={`Banner for ${title}`} />
-		</div>
-		<main class="page__content">
-			<Card title={title} date={pubDate} description={description} link_enabled={false} />
-			<article>
-				{
-					updatedDate && (
-						<div class="last-updated-on">
-							Last updated on&nbsp;<FormattedDate date={new Date(updatedDate)} />
-						</div>
-					)
-				}
-				<hr class="hori-line--with-margin"/>
-				<slot />
-			</article>
-		</main>
-		<Footer />
-	</body>
+    <body class="page">
+        <Header />
+        <div class="image-banner">
+        <img class="image-banner__image" src={heroImage} alt={`Banner for ${title}`} />
+        </div>
+        <main class="page__content">
+            <Card title={title} date={pubDate} description={description} link_enabled={false} />
+            <article>
+                {
+                    updatedDate && (
+                        <div class="last-updated-on">
+                            Last updated on&nbsp;<FormattedDate date={new Date(updatedDate)} />
+                        </div>
+                    )
+                }
+                <hr class="hori-line--with-margin"/>
+                <slot />
+            </article>
+            <div style="margin-top: 2rem;">
+                <script src="https://utteranc.es/client.js"
+                repo="lumirth/comments"
+                issue-term="pathname"
+                theme="preferred-color-scheme"
+                crossorigin="anonymous"
+                async>
+            </script>
+            </div>
+        </main>
+        <Footer />
+    </body>
 </html>
