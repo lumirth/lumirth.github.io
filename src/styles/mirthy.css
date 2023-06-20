@@ -77,7 +77,7 @@
     max-width: 850px;
   }
   .page__content {
-    min-height: calc(100vh - 400px);
+    min-height: calc(100vh - 365px);
   }
 }
 
