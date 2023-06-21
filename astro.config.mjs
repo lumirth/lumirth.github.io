@@ -28,7 +28,7 @@ export default defineConfig({
   }), webmanifest({
     name: 'LUMIRTH - Lukas Unguraitis',
     icon: 'src/laumono.svg',
-    short_name: 'MIRTH',
+    short_name: 'LUMIRTH',
     description: '@lumirth\'s corner of the worldwide web.',
     start_url: '/',
     display: 'standalone',
