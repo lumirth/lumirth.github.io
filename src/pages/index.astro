@@ -4,12 +4,13 @@ import Main from '../components/Main.astro';
 import {Content as Index} from '../components/pages/index.md';
 import LatestBlogPost from '../components/LatestBlogPost.astro';
 import LatestProject from '../components/LatestProject.astro';
+import { SLASH } from '../consts';
 ---
 
 <meta charset="utf-8" />
 <!DOCTYPE html>
 <html lang="en">
-	<Main page_title="LUMIRTH - Lukas Unguraitis">
+	<Main page_title={SLASH}>
 		<div class="container">
 			<div class="main-content">
 				<Index />

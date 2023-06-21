@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import Card from '../../components/Card.astro';
 import Main from '../../components/Main.astro';
+import { SLASH_BLOG } from '../../consts';
 
 // if not visible, don't render
 const all_posts = (await getCollection('blog')).filter((post) => post.data.visible);
@@ -18,7 +19,7 @@ const is_posts = posts.length > 0;
 <meta charset="utf-8" />
 <!DOCTYPE html>
 <html lang="en">
-	<Main page_title="LUMIRTH - BLOG">
+	<Main page_title={SLASH_BLOG}>
 		{ !is_posts && <code class="text--big-technical">NO POSTS AVAILABLE</code><br/> }
 		{
 			posts.map((post) => (

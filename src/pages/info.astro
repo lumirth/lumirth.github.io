@@ -1,12 +1,13 @@
 ---
 import Main from '../components/Main.astro';
 import {Content as Info} from '../components/pages/info.md';
+import { SLASH_INFO } from '../consts';
 ---
 
 <meta charset="utf-8" />
 <!DOCTYPE html>
 <html lang="en">
-	<Main page_title="LUMIRTH - INFO">
+	<Main page_title={SLASH_INFO}>
 		<Info />
 	</Main>
 </html>
