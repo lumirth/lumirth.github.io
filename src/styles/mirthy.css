@@ -71,17 +71,17 @@
   min-height: calc(100vh - 200px);
 }
 
-/* target iOS devices, extra padding because of tab bar */
+/* target iOS devices, extra footer padding because of bottom tab bar */
 @supports (-webkit-touch-callout: none) {
   .page__content {
     min-height: calc(100vh - 250px);
   }
 }
 
-/* target iOS devices, extra padding because of no tab bar in PWA */
+/* target iOS devices, less padding because of no tab bar in PWA */
 @media screen and (display-mode: standalone) {
   .page__content {
-    min-height: calc(100vh - 200px);
+    min-height: calc(100vh - 175px);
   }
 }
 
