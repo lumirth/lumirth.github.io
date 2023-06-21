@@ -8,11 +8,9 @@ import rehypeKatex from "rehype-katex";
 import turbolinks from "@astrojs/turbolinks"; // will be deprecated eventually
 import image from "@astrojs/image";
 import webmanifest from "astro-webmanifest";
-// import compress from "astro-compress";
 import customTheme from './monokai.json';
 import remarkCustomMedia from "./plugins/remarkCustomMedia"; // Import the custom plugin
 import rehypeStyleFixes from "./plugins/rehypeStyleFixes";
-// import rehypeLangElement from "./plugins/rehypeLangElement";
 
 /** @type {import('astro-m2dx').Options} */
 import svelte from "@astrojs/svelte";
