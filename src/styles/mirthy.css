@@ -16,9 +16,9 @@
 :root {
   /* themeable colors */
   --background-color: #fff;
-  --item-background-color: #f8f8f8;
-  --item-background-color-hover: #f0f0f0;
-  --border-color: #e7e7e7;
+  --item-background-color: #eee;
+  --item-background-color-hover: #ddd;
+  --border-color: #ccc;
   /* text colors */
   --text-color: #333;
   --faded-text-color: #666;
@@ -71,10 +71,17 @@
   min-height: calc(100vh - 200px);
 }
 
-/* target iOS devices */
+/* target iOS devices, extra padding because of tab bar */
 @supports (-webkit-touch-callout: none) {
   .page__content {
     min-height: calc(100vh - 250px);
+  }
+}
+
+/* target iOS devices, extra padding because of no tab bar in PWA */
+@media screen and (display-mode: standalone) {
+  .page__content {
+    min-height: calc(100vh - 200px);
   }
 }
 
