@@ -10,9 +10,9 @@ import image from "@astrojs/image";
 import webmanifest from "astro-webmanifest";
 // import compress from "astro-compress";
 import customTheme from './monokai.json';
-import remarkCustomMedia from "./remark-rehype-plugins/remarkCustomMedia"; // Import the custom plugin
-import rehypeStyleFixes from "./remark-rehype-plugins/rehypeStyleFixes";
-// import rehypeLangElement from "./remark-rehype-plugins/rehypeLangElement";
+import remarkCustomMedia from "./plugins/remarkCustomMedia"; // Import the custom plugin
+import rehypeStyleFixes from "./plugins/rehypeStyleFixes";
+// import rehypeLangElement from "./plugins/rehypeLangElement";
 
 /** @type {import('astro-m2dx').Options} */
 import svelte from "@astrojs/svelte";
