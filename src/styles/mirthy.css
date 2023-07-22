@@ -28,7 +28,7 @@
 
   /* text underline offset for the moving underline effect */
   --text-underline-offset-default: 0.15rem;
-  --text-underline-offset-hover-diff: 0.25rem;
+  --text-underline-offset-hover-diff: 0.15em;
   --text-decoration-thickness: 0.075rem;
 }
 
