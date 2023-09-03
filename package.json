@@ -17,7 +17,7 @@
     "@astrojs/svelte": "^2.1.0",
     "@astrojs/turbolinks": "^0.2.1",
     "astro": "^2.3.0",
-    "astro-compress": "^1.1.35",
+    "astro-compress": "^2.0.15",
     "astro-google-fonts-optimizer": "^0.2.2",
     "astro-icon": "^0.8.0",
     "astro-m2dx": "^0.7.15",
