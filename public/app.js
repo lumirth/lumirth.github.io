@@ -74,22 +74,25 @@ const apply_theme_colors_dynamically = function () {
   const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
   // if dark mode is enabled, set the status bar color to black
-  if (isDarkMode) {
-    document
-      .querySelector('meta[name="apple-mobile-web-app-status-bar-style"]')
-      .setAttribute("content", "black-translucent");
-    document
-      .querySelector('meta[name="theme-color"]')
-      .setAttribute("content", "#111");
+  const statusBarDarkMode = document.querySelector(
+    'meta[name="apple-mobile-web-app-status-bar-style"]'
+  );
+  if (statusBarDarkMode) {
+    statusBarDarkMode.setAttribute("content", "black-translucent");
   }
+
   // if dark mode is not enabled, set the status bar color to white
-  else {
-    document
-      .querySelector('meta[name="apple-mobile-web-app-status-bar-style"]')
-      .setAttribute("content", "default");
-    document
-      .querySelector('meta[name="theme-color"]')
-      .setAttribute("content", "#fff");
+  const statusBarLightMode = document.querySelector(
+    'meta[name="apple-mobile-web-app-status-bar-style"]'
+  );
+  if (statusBarLightMode) {
+    statusBarLightMode.setAttribute("content", "default");
+  }
+
+  // set the theme color based on the mode
+  const themeColor = document.querySelector('meta[name="theme-color"]');
+  if (themeColor) {
+    themeColor.setAttribute("content", isDarkMode ? "#111" : "#fff");
   }
 };
 
