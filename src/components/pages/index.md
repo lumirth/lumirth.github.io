@@ -4,7 +4,7 @@ I wear a number of hats.
 
 - Student of Computer Science + Philosophy @ [Illinois](https://cs.illinois.edu)
 - Creator of [Course Warlock](https://warlock.mirth.cc), [Illinois](https://illinois.edu) course search engine
-  - and other [projects](/projects)
+  - and other [projects](/work)
 
 ---
 
