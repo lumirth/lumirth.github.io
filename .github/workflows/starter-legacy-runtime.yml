@@ -1,0 +1,38 @@
+name: Starter legacy-content dependencies (no deployment)
+on:
+  push:
+    branches: [starter-core-build-2026-09-22]
+    paths: [.github/workflows/starter-legacy-runtime.yml]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  dependencies:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22.16.0'
+      - name: Extend the verified runtime
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euxo pipefail
+          gh run download 35775091403 -R lumirth/lumirth.github.io -n starter-runtime-linux-x64
+          tar -xzf starter-runtime-linux-x64.tgz
+          cd runtime
+          npm install --save-exact @astrojs/svelte svelte remark-math rehype-katex katex
+          npm ls --depth=0
+          cd ..
+          tar -czf starter-extended-runtime.tgz runtime
+          sha256sum starter-extended-runtime.tgz > SHA256SUMS
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: starter-extended-runtime
+          path: |
+            starter-extended-runtime.tgz
+            SHA256SUMS
+          compression-level: 0
+          retention-days: 1
