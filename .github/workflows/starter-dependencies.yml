@@ -1,0 +1,59 @@
+name: Starter dependency artifact (no deployment)
+on:
+  push:
+    branches: [starter-core-build-2026-09-22]
+    paths: [.github/workflows/starter-dependencies.yml]
+permissions:
+  contents: read
+jobs:
+  dependencies:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22.16.0'
+      - name: Prepare dependencies and public research sources
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p bundle/runtime bundle/sources
+          cd bundle/runtime
+          printf '{"name":"kukas-core","version":"0.2.0","private":true,"type":"module","engines":{"node":">=22.12.0"}}\n' > package.json
+          npm install --save-exact astro@7.3.3 @astrojs/cloudflare@14.3.2 @astrojs/mdx@8.0.1 @astrojs/react@6.0.6 @keystatic/core@0.6.9 @keystatic/astro@6.0.0 react@19.3.0 react-dom@19.3.0 yaml@2.8.1 unified@11.0.5 remark-parse@11.0.0 remark-mdx@3.1.0 remark-gfm@4.0.1 remark-stringify@11.0.0 unist-util-visit@5.0.0 @mdx-js/mdx@3.1.1 aws4fetch@1.0.20
+          npm install --save-dev --save-exact @astrojs/check@0.9.5 @playwright/test@1.56.1 typescript@5.9.3 tsx@4.20.6 wrangler@4.125.0 esbuild@0.25.11 @types/react@19.2.2 @types/react-dom@19.2.2 sharp@0.35.4 jsdom@26.1.0 @types/node@22.15.30 @axe-core/playwright@4.10.2
+          npm ls --all --json > dependency-tree.json || true
+          node -e "import('astro').then(() => console.log('astro module imported'))"
+          node -e "import('@keystatic/core').then(m => console.log('Keystatic MDX field:', typeof m.fields.mdx))"
+          cd ../sources
+          git clone --depth=1 https://github.com/lumirth/lumirth.github.io.git original
+          git clone --filter=blob:none --no-checkout https://github.com/Thinkmill/keystatic.git keystatic
+          git -C keystatic checkout main
+          git -C keystatic log --date=iso-strict --format='%H %ad %s' -- packages/keystatic/src/form/fields/markdoc/editor/mdx > keystatic-mdx-history.txt
+          git clone --depth=1 https://github.com/HermanMartinus/bearblog.git bearblog
+          git clone --depth=1 https://github.com/jovialio/obsidian-mdx.git obsidian-mdx-preview || true
+          git clone --depth=1 https://github.com/yulei-chen/obsidian-mdx.git obsidian-mdx-support || true
+          git clone --depth=1 https://github.com/renmu123/obsidian-image-auto-upload-plugin.git obsidian-image-auto-upload
+          git clone --depth=1 https://github.com/jvsteiner/s3-image-uploader.git obsidian-s3-uploader
+          for dir in */; do if [ -d "$dir/.git" ]; then git -C "$dir" rev-parse HEAD > "$dir/SOURCE_COMMIT"; fi; done
+          rm -rf */.git
+          cd ../..
+          tar -czf starter-runtime-linux-x64.tgz -C bundle runtime
+          tar -czf starter-public-sources.tgz -C bundle sources
+          sha256sum starter-*.tgz > SHA256SUMS
+      - name: Upload dependency runtime
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: starter-runtime-linux-x64
+          path: starter-runtime-linux-x64.tgz
+          compression-level: 0
+          retention-days: 1
+      - name: Upload public source recovery
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: starter-public-sources
+          path: |
+            starter-public-sources.tgz
+            SHA256SUMS
+          compression-level: 0
+          retention-days: 1
