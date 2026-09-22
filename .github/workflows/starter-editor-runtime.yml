@@ -1,0 +1,48 @@
+name: Starter editor test runtime (no deployment)
+on:
+  push:
+    branches: [starter-core-build-2026-09-22]
+    paths: [.github/workflows/starter-editor-runtime.yml]
+permissions:
+  contents: read
+jobs:
+  editor-runtime:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - name: Fetch official Obsidian and existing plugins
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p editor-runtime
+          python3 - <<'PY'
+          import json, urllib.request, os, pathlib, hashlib
+          root=pathlib.Path('editor-runtime')
+          headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','User-Agent':'kukas-editor-test'}
+          def api(path):
+              return json.load(urllib.request.urlopen(urllib.request.Request('https://api.github.com/'+path,headers=headers)))
+          official=api('repos/obsidianmd/obsidian-releases/releases/latest')
+          (root/'obsidian-release.json').write_text(json.dumps(official,indent=2))
+          asset=next(a for a in official['assets'] if a['name'].endswith('.AppImage') and 'arm' not in a['name'].lower())
+          urllib.request.urlretrieve(asset['browser_download_url'],root/'Obsidian.AppImage')
+          for repo in ['timppeters/obsidian-edit-mdx','jovialio/obsidian-mdx','renmu123/obsidian-image-auto-upload-plugin']:
+              release=api('repos/'+repo+'/releases/latest')
+              target=root/repo.split('/')[1]
+              target.mkdir()
+              (target/'release.json').write_text(json.dumps(release,indent=2))
+              for a in release['assets']:
+                  if a['name'] in ['main.js','manifest.json','styles.css']:
+                      urllib.request.urlretrieve(a['browser_download_url'],target/a['name'])
+          plugins=json.load(urllib.request.urlopen('https://raw.githubusercontent.com/obsidianmd/obsidian-releases/master/community-plugins.json'))
+          (root/'plugin-directory-excerpts.json').write_text(json.dumps([p for p in plugins if 'mdx' in json.dumps(p).lower() or 'auto upload' in p['name'].lower()],indent=2))
+          (root/'SHA256SUMS').write_text('\n'.join(hashlib.sha256(p.read_bytes()).hexdigest()+'  '+str(p.relative_to(root)) for p in root.rglob('*') if p.is_file()))
+          PY
+          tar -czf editor-runtime.tgz editor-runtime
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: starter-editor-runtime
+          path: editor-runtime.tgz
+          compression-level: 0
+          retention-days: 1
