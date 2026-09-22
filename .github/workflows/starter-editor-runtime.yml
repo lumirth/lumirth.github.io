@@ -23,10 +23,15 @@ jobs:
           headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','User-Agent':'kukas-editor-test'}
           def api(path):
               return json.load(urllib.request.urlopen(urllib.request.Request('https://api.github.com/'+path,headers=headers)))
-          official=api('repos/obsidianmd/obsidian-releases/releases/latest')
+          releases=api('repos/obsidianmd/obsidian-releases/releases?per_page=100')
+          candidates=[(r,a) for r in releases if not r['prerelease'] for a in r['assets'] if a['name'].endswith('.AppImage') and 'arm' not in a['name'].lower()]
+          official,asset=candidates[0]
+          print('Installer',official['tag_name'],asset['name'])
           (root/'obsidian-release.json').write_text(json.dumps(official,indent=2))
-          asset=next(a for a in official['assets'] if a['name'].endswith('.AppImage') and 'arm' not in a['name'].lower())
           urllib.request.urlretrieve(asset['browser_download_url'],root/'Obsidian.AppImage')
+          current=json.load(urllib.request.urlopen('https://raw.githubusercontent.com/obsidianmd/obsidian-releases/master/desktop-releases.json'))
+          (root/'desktop-releases.json').write_text(json.dumps(current,indent=2))
+          urllib.request.urlretrieve(current['downloadUrl'],root/('obsidian-'+current['latestVersion']+'.asar.gz'))
           for repo in ['timppeters/obsidian-edit-mdx','jovialio/obsidian-mdx','renmu123/obsidian-image-auto-upload-plugin']:
               release=api('repos/'+repo+'/releases/latest')
               target=root/repo.split('/')[1]
